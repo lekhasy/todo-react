@@ -1,0 +1,10 @@
+.todoListContainer {
+  display: grid;
+  grid-gap: 8px;
+}
+
+.todoContainer {
+  padding: 8px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}

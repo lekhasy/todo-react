@@ -1,0 +1,26 @@
+.app {
+  height: 100vh;
+  display: grid;
+  padding: 16px;
+
+  grid-template-rows: auto auto 1fr;
+
+  grid-gap: 8px;
+
+  grid-template-areas:
+    "header"
+    "task-input"
+    "task-list";
+}
+
+.header {
+  grid-area: header;
+}
+
+.taskInputContainer {
+  grid-area: task-input;
+}
+
+.taskListContainer {
+  grid-area: task-list;
+}

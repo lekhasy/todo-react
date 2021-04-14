@@ -14,16 +14,6 @@ function TaskItem({ taskItem, onCompletionStageChanged }) {
       >
         {taskItem.taskName}
       </Checkbox>
-      <p className={classes.createdDate}>
-        Created date: {taskItem.createdDate.toDateString()}
-      </p>
-      <p
-        className={taskItem.isCompleted ? classes.textSuccess : classes.textRed}
-      >
-        {taskItem.isCompleted
-          ? "Compledted date: " + taskItem.completedDate.toDateString()
-          : "Not Complete"}
-      </p>
     </div>
   );
 }

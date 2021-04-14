@@ -1,21 +1,25 @@
 import { v4 as uuidv4 } from "uuid";
-
-const MockTasks = [
+const MockTask = [
   {
     id: uuidv4(),
-    completed: false,
-    taskName: "Làm bài tập",
+    taskName: "Do requirement",
+    isCompleted: false,
+    createdDate: new Date("04/13/2021"),
+    completedDate: "",
   },
   {
     id: uuidv4(),
-    completed: true,
-    taskName: "Không làm bài tập nữa",
+    taskName: "Do proposal",
+    isCompleted: false,
+    createdDate: new Date("04/12/2021"),
+    completedDate: "",
   },
   {
     id: uuidv4(),
-    completed: false,
-    taskName: "Bỏ học",
+    taskName: "Do react-app",
+    isCompleted: false,
+    createdDate: new Date("04/14/2021"),
+    completedDate: "",
   },
 ];
-
-export default MockTasks;
+export default MockTask;

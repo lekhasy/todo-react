@@ -3,41 +3,62 @@ import "antd/dist/antd.css";
 import TaskInput from "./TaskInput";
 import Title from "antd/lib/typography/Title";
 import TodoList from "./TodoList";
-import { useState } from "react";
-import MockTasks from "./MockTasks";
+import React, { useState } from "react";
+import MockTask from "./MockTasks";
 import { v4 as uuidv4 } from "uuid";
+import _ from "lodash";
 
 function App() {
-  const [taskList, setTaskList] = useState(MockTasks);
+  const [taskList, setTaskList] = useState(MockTask);
 
-  const handleCompletionStateChanged = (taskId, val) => {
-    const newTaskList = taskList.map((t) =>
-      t.id === taskId ? { ...t, completed: val } : t
+  const changeStatus = (id, value) => {
+    const newTasklist = taskList.map((el) =>
+      el.id === id
+        ? { ...el, isCompleted: value, completedDate: value ? new Date() : "" }
+        : el
     );
-    setTaskList(newTaskList);
+    setTaskList(newTasklist);
   };
 
-  const handleAddNewTask = (newTaskName) => {
+  const tasksNotCompleted = _.orderBy(
+    taskList.filter((e) => e.isCompleted === false),
+    ["createdDate"],
+    ["desc"]
+  );
+  const tasksCompleted = _.orderBy(
+    taskList.filter((e) => e.isCompleted === true),
+    ["completedDate"],
+    ["desc"]
+  );
+
+  const handleAddTask = (newTaskName) => {
     setTaskList([
       ...taskList,
       {
         taskName: newTaskName,
         id: uuidv4(),
-        completed: false,
+        isCompleted: false,
+        createdDate: new Date(),
       },
     ]);
   };
-
   return (
     <div className={classes.app}>
       <Title className={classes.header}>Todo app</Title>
       <div className={classes.taskInputContainer}>
-        <TaskInput onNewTaskAdded={handleAddNewTask} />
+        <TaskInput handleAddTask={handleAddTask} />
       </div>
       <section className={classes.taskListContainer}>
         <TodoList
-          onCompletionStateChanged={handleCompletionStateChanged}
-          taskList={taskList}
+          changeStatus={changeStatus}
+          taskList={tasksNotCompleted}
+          title={"Danh sách task"}
+        />
+
+        <TodoList
+          changeStatus={changeStatus}
+          taskList={tasksCompleted}
+          title={"Danh sách task hoàn thành"}
         />
       </section>
     </div>

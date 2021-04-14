@@ -1,16 +1,29 @@
 import { Checkbox } from "antd";
 import classes from "./TaskItem.module.css";
-
-function TaskItem({ item, onCompletionStateChanged }) {
-  const handleChange = (event) => {
-    onCompletionStateChanged(item.id, event.target.checked);
+function TaskItem({ taskItem, onCompletionStageChanged }) {
+  const handleChange = (e) => {
+    onCompletionStageChanged(taskItem.id, e.target.checked);
   };
-
   return (
     <div className={classes.todoContainer}>
-      <Checkbox onChange={handleChange} checked={item.completed}>
-        {item.taskName}
+      <Checkbox
+        id={taskItem.id}
+        className={taskItem.isCompleted ? classes.completed : ""}
+        onChange={handleChange}
+        checked={taskItem.isCompleted}
+      >
+        {taskItem.taskName}
       </Checkbox>
+      <p className={classes.createdDate}>
+        Created date: {taskItem.createdDate.toDateString()}
+      </p>
+      <p
+        className={taskItem.isCompleted ? classes.textSuccess : classes.textRed}
+      >
+        {taskItem.isCompleted
+          ? "Compledted date: " + taskItem.completedDate.toDateString()
+          : "Not Complete"}
+      </p>
     </div>
   );
 }

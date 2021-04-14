@@ -1,0 +1,19 @@
+.todoContainer {
+  padding: 8px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+
+.doneContainer {
+  padding: 8px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+
+.textToDo {
+}
+
+.textDone {
+  text-decoration: line-through;
+  color: rgba(131, 130, 130, 0.85);
+}

@@ -9,20 +9,19 @@
   border-radius: 5px;
 }
 .completed {
-    text-decoration: line-through;
-    color: rgb(128, 128, 128);
+  text-decoration: line-through;
+  color: rgb(128, 128, 128);
 }
-.createdDate{
-    color: orange;
+.createdDate {
+  color: orange;
 }
-.textRed{
-    color: red;
+.textRed {
+  color: red;
 }
-.textSuccess{
-    color: rgb(21, 214, 21);
-}
-
-.todoContainer p{
-    margin: 0;
+.textSuccess {
+  color: rgb(21, 214, 21);
 }
 
+.todoContainer p {
+  margin: 0;
+}

@@ -5,7 +5,7 @@ function TaskInput({handleAddTask}) {
   const [inputValue,setValue] = React.useState("");
   
   const handlePressEnter = () => {
-    if(inputValue == ""){
+    if(inputValue === ""){
       return;
     }
     handleAddTask(inputValue);

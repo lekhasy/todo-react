@@ -5,30 +5,42 @@ import Title from "antd/lib/typography/Title";
 import TodoList from "./TodoList";
 import React, { useState } from "react";
 import MockTask from "./MockTasks";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 function App() {
-
   const [taskList, setTaskList] = useState(MockTask);
 
-
   const changeStatus = (id, value) => {
+    const newTasklist = taskList.map((el) =>
+      el.id === id
+        ? { ...el, isCompleted: value, completedDate: value ? new Date() : "" }
+        : el
+    );
+    setTaskList(newTasklist);
+  };
 
-    const newTasklist = taskList.map(el => el.id === id ? { ...el, isCompleted: value,completedDate: value? new Date(): "" } : el);
-    setTaskList(newTasklist)
-
-  }
-
-  const tasksNotCompleted = taskList.filter(e => e.isCompleted === false).sort((a, b) => {
-    return b.createdDate.getTime() - a.createdDate.getTime();
-  });
-  const tasksCompleted = taskList.filter(e => e.isCompleted === true).sort((a, b) => {
-    return b.completedDate.getTime() - a.completedDate.getTime();
-  });
+  const tasksNotCompleted = taskList
+    .filter((e) => e.isCompleted === false)
+    .sort((a, b) => {
+      return b.createdDate.getTime() - a.createdDate.getTime();
+    });
+  const tasksCompleted = taskList
+    .filter((e) => e.isCompleted === true)
+    .sort((a, b) => {
+      return b.completedDate.getTime() - a.completedDate.getTime();
+    });
 
   const handleAddTask = (newTaskName) => {
-    setTaskList([...taskList, { taskName: newTaskName, id: uuidv4(), isCompleted: false,createdDate:new Date() }]);
-  }
+    setTaskList([
+      ...taskList,
+      {
+        taskName: newTaskName,
+        id: uuidv4(),
+        isCompleted: false,
+        createdDate: new Date(),
+      },
+    ]);
+  };
   return (
     <div className={classes.app}>
       <Title className={classes.header}>Todo app</Title>

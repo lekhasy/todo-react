@@ -6,6 +6,7 @@ import TodoList from "./TodoList";
 import React, { useState } from "react";
 import MockTask from "./MockTasks";
 import { v4 as uuidv4 } from "uuid";
+import _ from "lodash";
 
 function App() {
   const [taskList, setTaskList] = useState(MockTask);
@@ -19,16 +20,16 @@ function App() {
     setTaskList(newTasklist);
   };
 
-  const tasksNotCompleted = taskList
-    .filter((e) => e.isCompleted === false)
-    .sort((a, b) => {
-      return b.createdDate.getTime() - a.createdDate.getTime();
-    });
-  const tasksCompleted = taskList
-    .filter((e) => e.isCompleted === true)
-    .sort((a, b) => {
-      return b.completedDate.getTime() - a.completedDate.getTime();
-    });
+  const tasksNotCompleted = _.orderBy(
+    taskList.filter((e) => e.isCompleted === false),
+    ["createdDate"],
+    ["desc"]
+  );
+  const tasksCompleted = _.orderBy(
+    taskList.filter((e) => e.isCompleted === true),
+    ["completedDate"],
+    ["desc"]
+  );
 
   const handleAddTask = (newTaskName) => {
     setTaskList([
@@ -48,10 +49,17 @@ function App() {
         <TaskInput handleAddTask={handleAddTask} />
       </div>
       <section className={classes.taskListContainer}>
-        <Title level={3}>Danh sách task</Title>
-        <TodoList changeStatus={changeStatus} taskList={tasksNotCompleted} />
-        <Title level={3}>Danh sách task hoàn thành</Title>
-        <TodoList changeStatus={changeStatus} taskList={tasksCompleted} />
+        <TodoList
+          changeStatus={changeStatus}
+          taskList={tasksNotCompleted}
+          title={"Danh sách task"}
+        />
+
+        <TodoList
+          changeStatus={changeStatus}
+          taskList={tasksCompleted}
+          title={"Danh sách task hoàn thành"}
+        />
       </section>
     </div>
   );

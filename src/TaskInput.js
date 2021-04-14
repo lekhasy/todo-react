@@ -1,27 +1,22 @@
 import { Input } from "antd";
-import { useState } from "react";
+import React from "react";
 
-function TaskInput({ onNewTaskAdded }) {
-  const [inputVal, setInputVal] = useState("");
-
+function TaskInput({handleAddTask}) {
+  const [inputValue,setValue] = React.useState("");
+  
   const handlePressEnter = () => {
-    if (inputVal === "") {
+    if(inputValue === ""){
       return;
     }
-
-    onNewTaskAdded(inputVal);
-
-    setInputVal("");
+    handleAddTask(inputValue);
+    setValue("");
   };
 
-  return (
-    <Input
-      value={inputVal}
-      onChange={(e) => setInputVal(e.target.value)}
-      placeholder="Nhập tên task rồi ấn enter"
-      onPressEnter={handlePressEnter}
-    />
-  );
+  const handleOnChange = (e) =>{
+    setValue(e.target.value);
+  }
+
+  return <Input placeholder="Nhập tên task rồi ấn enter" value={inputValue} onChange={handleOnChange} onPressEnter={handlePressEnter} />;
 }
 
 export default TaskInput;

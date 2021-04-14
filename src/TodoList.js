@@ -11,10 +11,10 @@ function TodoList(props) {
   }
   return (
     <div className={classes.todoListContainer}>
-      <Title level={3}>Danh sách task</Title>
+      
       {taskList.map(task => (
 
-        <TaskItem item={task} onCompletionStageChanged={onCompletionStageChanged} />
+        <TaskItem taskItem={task} onCompletionStageChanged={onCompletionStageChanged} />
 
       ))}
 

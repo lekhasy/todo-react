@@ -14,27 +14,32 @@ function App() {
 
   const changeStatus = (id, value) => {
 
-    const newTasklist = taskList.map(el => el.id === id ? { ...el, isCompleted: value } : el);
+    const newTasklist = taskList.map(el => el.id === id ? { ...el, isCompleted: value,completedDate: value? new Date(): "" } : el);
     setTaskList(newTasklist)
 
   }
 
-  const unChecked = taskList.filter(e=> e.isCompleted === false);
-  const checked = taskList.filter(e=> e.isCompleted === true);
+  const tasksNotCompleted = taskList.filter(e => e.isCompleted === false).sort((a, b) => {
+    return b.createdDate.getTime() - a.createdDate.getTime();
+  });
+  const tasksCompleted = taskList.filter(e => e.isCompleted === true).sort((a, b) => {
+    return b.completedDate.getTime() - a.completedDate.getTime();
+  });
 
   const handleAddTask = (newTaskName) => {
-      setTaskList([...taskList,{taskName:newTaskName,id:uuidv4(), isCompleted:false}]);
+    setTaskList([...taskList, { taskName: newTaskName, id: uuidv4(), isCompleted: false,createdDate:new Date() }]);
   }
   return (
     <div className={classes.app}>
       <Title className={classes.header}>Todo app</Title>
       <div className={classes.taskInputContainer}>
-        <TaskInput handleAddTask={handleAddTask}/>
+        <TaskInput handleAddTask={handleAddTask} />
       </div>
       <section className={classes.taskListContainer}>
-        <TodoList changeStatus={changeStatus} taskList={unChecked} />
-        <p>123312312</p>
-        <TodoList changeStatus={changeStatus} taskList={checked} />
+        <Title level={3}>Danh sách task</Title>
+        <TodoList changeStatus={changeStatus} taskList={tasksNotCompleted} />
+        <Title level={3}>Danh sách task hoàn thành</Title>
+        <TodoList changeStatus={changeStatus} taskList={tasksCompleted} />
       </section>
     </div>
   );

@@ -3,17 +3,23 @@ const MockTask =  [
     {
         id:uuidv4(),
         taskName:"Do requirement",
-        isCompleted:false
+        isCompleted:false,
+        createdDate: new Date("04/13/2021"),
+        completedDate: ""
     },
     {
         id:uuidv4(),
-        taskName:"Do requirement",
-        isCompleted:false
+        taskName:"Do proposal",
+        isCompleted:false,
+        createdDate: new Date("04/12/2021"),
+        completedDate: ""
     },
     {
         id:uuidv4(),
-        taskName:"Do requirement",
-        isCompleted:false
+        taskName:"Do react-app",
+        isCompleted:false,
+        createdDate: new Date("04/14/2021"),
+        completedDate: ""
     }
 ]
 export default MockTask;

@@ -1,3 +1,28 @@
-.toDoCompleted{
-    
+.todoListContainer {
+  display: grid;
+  grid-gap: 8px;
 }
+
+.todoContainer {
+  padding: 8px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+.completed {
+    text-decoration: line-through;
+    color: rgb(128, 128, 128);
+}
+.createdDate{
+    color: orange;
+}
+.textRed{
+    color: red;
+}
+.textSuccess{
+    color: rgb(21, 214, 21);
+}
+
+.todoContainer p{
+    margin: 0;
+}
+

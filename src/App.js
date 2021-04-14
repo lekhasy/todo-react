@@ -22,13 +22,12 @@ function App() {
     setTaskList(newTasklist);
   };
 
+  const partitions = _.partition(taskList, (task) => task.isCompleted);
+
+  const tasksCompleted = _.orderBy(partitions[0], ["createdDate"], ["desc"]);
+
   const tasksNotCompleted = _.orderBy(
-    taskList.filter((e) => e.isCompleted === false),
-    ["createdDate"],
-    ["desc"]
-  );
-  const tasksCompleted = _.orderBy(
-    taskList.filter((e) => e.isCompleted === true),
+    partitions[1],
     ["completedDate"],
     ["desc"]
   );

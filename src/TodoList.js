@@ -10,15 +10,19 @@ function TodoList(props) {
     props.changeStatus(id, value);
   }
   return (
-    <div className={classes.todoListContainer}>
-      
-      {taskList.map(task => (
+    <div>
+        <Title level={3}>{props.title}</Title>
+        <div className={classes.todoListContainer}>
+        
+        {taskList.map(task => (
 
-        <TaskItem taskItem={task} onCompletionStageChanged={onCompletionStageChanged} />
+          <TaskItem taskItem={task} onCompletionStageChanged={onCompletionStageChanged} />
 
-      ))}
+        ))}
 
+      </div>
     </div>
+    
   );
 }
 

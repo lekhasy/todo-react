@@ -7,6 +7,8 @@
   padding: 8px;
   border: 1px solid lightgray;
   border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
 }
 .completed {
   text-decoration: line-through;
@@ -24,4 +26,38 @@
 
 .todoContainer p {
   margin: 0;
+}
+
+.starFav {
+  border: none;
+  background-color: white;
+  visibility: hidden;
+}
+
+.hideStarFav{
+  display: none;
+}
+
+.starFav:checked,
+.starFav:active,
+.starFav:checked:hover {
+  outline: 0;
+  background-color: #fff;
+  color: #fff !important;
+}
+
+.starOn {
+  color: black;
+  opacity: 1;
+  visibility: visible;
+  display: unset;
+  font-size: 16px;
+  margin-top: 3px;
+}
+
+.starOff {
+  color: black;
+  opacity: 1;
+  visibility: hidden;
+  display: none;
 }

@@ -7,6 +7,9 @@ function TodoList(props) {
   const onCompletionStageChanged = (id, value) => {
     props.changeStatus(id, value);
   };
+  const onChooseFavouriteTask = (id, value) => {
+    props.chooseFav(id,value);
+  }
   return (
     <div>
       <Title level={3}>{props.title}</Title>
@@ -14,6 +17,7 @@ function TodoList(props) {
         {taskList.map((task) => (
           <TaskItem
             taskItem={task}
+            onChooseFavouriteTask={onChooseFavouriteTask}
             onCompletionStageChanged={onCompletionStageChanged}
           />
         ))}

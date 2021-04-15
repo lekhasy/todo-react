@@ -22,14 +22,29 @@ function App() {
     setTaskList(newTasklist);
   };
 
+  const chooseFav = (id, value) => {
+    const newTasklist = taskList.map((el) =>
+      el.id === id
+        ? { ...el, isFavourite: value, }
+        : el
+    );
+    setTaskList(newTasklist);
+  }
+  const notChooseFav = (id, value) => {
+    const newTasklist = taskList.map((el) =>
+      el.id === id ? { ...el, isFavourite: false } : el
+    );
+    setTaskList(newTasklist);
+  };
+
   const partitions = _.partition(taskList, (task) => task.isCompleted);
 
   const tasksCompleted = _.orderBy(partitions[0], ["createdDate"], ["desc"]);
 
   const tasksNotCompleted = _.orderBy(
     partitions[1],
-    ["completedDate"],
-    ["desc"]
+    ["isFavourite", "completedDate"],
+    ["desc", "desc"]
   );
 
   const handleAddTask = (newTaskName) => {
@@ -39,6 +54,7 @@ function App() {
         taskName: newTaskName,
         id: uuidv4(),
         isCompleted: false,
+        isFavourite: false,
         createdDate: new Date(),
       },
     ]);
@@ -53,6 +69,7 @@ function App() {
         <section className={classes.taskListContainer}>
           <TodoList
             changeStatus={changeStatus}
+            chooseFav={chooseFav}
             taskList={tasksNotCompleted}
             title={"Danh sách task"}
           />
@@ -60,6 +77,7 @@ function App() {
           <TodoList
             changeStatus={changeStatus}
             taskList={tasksCompleted}
+            chooseFav={notChooseFav}
             title={"Danh sách task hoàn thành"}
           />
         </section>

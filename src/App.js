@@ -51,13 +51,13 @@ function App() {
         <TodoList
           changeStatus={changeStatus}
           taskList={tasksNotCompleted}
-          title={"Danh sách task"}
+          title={"Danh sách tasks"}
         />
 
         <TodoList
           changeStatus={changeStatus}
           taskList={tasksCompleted}
-          title={"Danh sách task hoàn thành"}
+          title={"Danh sách tasks hoàn thành"}
         />
       </section>
     </div>

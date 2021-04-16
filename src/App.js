@@ -28,12 +28,6 @@ function App() {
     );
     setTaskList(newTasklist);
   };
-  const notChooseFav = (id, value) => {
-    const newTasklist = taskList.map((el) =>
-      el.id === id ? { ...el, isFavourite: false } : el
-    );
-    setTaskList(newTasklist);
-  };
 
   const partitions = _.partition(taskList, (task) => task.isCompleted);
 
@@ -75,7 +69,7 @@ function App() {
           <TodoList
             changeStatus={changeStatus}
             taskList={tasksCompleted}
-            chooseFav={notChooseFav}
+            chooseFav={chooseFav}
             title={"Danh sách task hoàn thành"}
           />
         </section>

@@ -28,10 +28,12 @@ function TaskItem({
         {taskItem.taskName}
       </Checkbox>
 
-      <AiFillStar
-        onClick={handleFavStatus}
-        style={{ color: taskItem.isFavourite ? "orange" : "gainsboro" }}
-      />
+      {taskItem.isCompleted ? null : (
+        <AiFillStar
+          onClick={handleFavStatus}
+          style={{ color: taskItem.isFavourite ? "orange" : "gainsboro" }}
+        />
+      )}
     </div>
   );
 }

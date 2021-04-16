@@ -8,8 +8,8 @@ function TodoList(props) {
     props.changeStatus(id, value);
   };
   const onChooseFavouriteTask = (id, value) => {
-    props.chooseFav(id,value);
-  }
+    props.chooseFav(id, value);
+  };
   return (
     <div>
       <Title level={3}>{props.title}</Title>

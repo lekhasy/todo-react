@@ -24,12 +24,10 @@ function App() {
 
   const chooseFav = (id, value) => {
     const newTasklist = taskList.map((el) =>
-      el.id === id
-        ? { ...el, isFavourite: value, }
-        : el
+      el.id === id ? { ...el, isFavourite: value } : el
     );
     setTaskList(newTasklist);
-  }
+  };
   const notChooseFav = (id, value) => {
     const newTasklist = taskList.map((el) =>
       el.id === id ? { ...el, isFavourite: false } : el

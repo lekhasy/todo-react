@@ -1,4 +1,5 @@
 import { Checkbox } from "antd";
+import ImportantStar from "./ImportantStar";
 import classes from "./TaskItem.module.css";
 function TaskItem({ taskItem, onCompletionStageChanged }) {
   const handleChange = (e) => {
@@ -14,6 +15,7 @@ function TaskItem({ taskItem, onCompletionStageChanged }) {
       >
         {taskItem.taskName}
       </Checkbox>
+      <ImportantStar taskItem={taskItem} />
     </div>
   );
 }

@@ -8,6 +8,9 @@ import MockTask from "./MockTasks";
 import { v4 as uuidv4 } from "uuid";
 import _ from "lodash";
 
+const ImportantContext = React.createContext();
+
+export { ImportantContext };
 function App() {
   const [taskList, setTaskList] = useState(MockTask);
 
@@ -24,12 +27,15 @@ function App() {
 
   const tasksCompleted = _.orderBy(partitions[0], ["createdDate"], ["desc"]);
 
-  const tasksNotCompleted = _.orderBy(
-    partitions[1],
-    ["completedDate"],
-    ["desc"]
-  );
+  const tasksImportant = _.partition(partitions[1], (task) => task.isImportant);
 
+  const tasksImportantOrder = _.orderBy(tasksImportant[0], ["importantTime"]);
+  console.log("taskOrder", tasksImportantOrder);
+
+  const tasksNotCompleted = _.concat(
+    tasksImportantOrder,
+    _.orderBy(tasksImportant[1], ["completedDate"], ["desc"])
+  );
   const handleAddTask = (newTaskName) => {
     setTaskList([
       ...taskList,
@@ -38,29 +44,48 @@ function App() {
         id: uuidv4(),
         isCompleted: false,
         createdDate: new Date(),
+        isImportant: false,
+        importantTime: 1,
       },
     ]);
   };
-  return (
-    <div className={classes.app}>
-      <Title className={classes.header}>Todo app</Title>
-      <div className={classes.taskInputContainer}>
-        <TaskInput handleAddTask={handleAddTask} />
-      </div>
-      <section className={classes.taskListContainer}>
-        <TodoList
-          changeStatus={changeStatus}
-          taskList={tasksNotCompleted}
-          title={"Danh sách task"}
-        />
+  const conText = {
+    handleImportantTask: (id, toggleImportant) => {
+      const newTasklist = taskList.map((task) =>
+        task.id === id
+          ? {
+              ...task,
+              isImportant: toggleImportant ? false : true,
+              importantTime: toggleImportant ? 1 : new Date().getTime(),
+            }
+          : task
+      );
+      setTaskList(newTasklist);
+    },
+  };
 
-        <TodoList
-          changeStatus={changeStatus}
-          taskList={tasksCompleted}
-          title={"Danh sách task hoàn thành"}
-        />
-      </section>
-    </div>
+  return (
+    <ImportantContext.Provider value={conText}>
+      <div className={classes.app}>
+        <Title className={classes.header}>Todo app</Title>
+        <div className={classes.taskInputContainer}>
+          <TaskInput handleAddTask={handleAddTask} />
+        </div>
+        <section className={classes.taskListContainer}>
+          <TodoList
+            changeStatus={changeStatus}
+            taskList={tasksNotCompleted}
+            title={"Danh sách task"}
+          />
+
+          <TodoList
+            changeStatus={changeStatus}
+            taskList={tasksCompleted}
+            title={"Danh sách task hoàn thành"}
+          />
+        </section>
+      </div>
+    </ImportantContext.Provider>
   );
 }
 

@@ -1,0 +1,8 @@
+.star {
+  display: inline-block;
+  float: right;
+}
+
+.starChecked {
+  color: orange;
+}

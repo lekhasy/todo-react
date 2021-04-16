@@ -1,6 +1,10 @@
 import { Checkbox } from "antd";
+import { TodoAppContext } from "./App";
+import React from "react";
 import classes from "./TaskItem.module.css";
 function TaskItem({ taskItem, onCompletionStageChanged }) {
+  const appContextValue = React.useContext(TodoAppContext);
+
   const handleChange = (e) => {
     onCompletionStageChanged(taskItem.id, e.target.checked);
   };
@@ -14,6 +18,7 @@ function TaskItem({ taskItem, onCompletionStageChanged }) {
       >
         {taskItem.taskName}
       </Checkbox>
+      <p>{appContextValue.appName}</p>
     </div>
   );
 }

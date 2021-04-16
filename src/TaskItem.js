@@ -1,13 +1,22 @@
-import { Checkbox } from "antd";
-import { TodoAppContext } from "./App";
 import React from "react";
+import { Checkbox } from "antd";
 import classes from "./TaskItem.module.css";
-function TaskItem({ taskItem, onCompletionStageChanged }) {
-  const appContextValue = React.useContext(TodoAppContext);
+import { AiFillStar } from "react-icons/ai";
 
+function TaskItem({
+  taskItem,
+  onChooseFavouriteTask,
+  onCompletionStageChanged,
+}) {
   const handleChange = (e) => {
     onCompletionStageChanged(taskItem.id, e.target.checked);
   };
+
+  const handleFavStatus = (e) => {
+    onChooseFavouriteTask(taskItem.id, !taskItem.isFavourite);
+    console.log(e.target.checked);
+  };
+
   return (
     <div className={classes.todoContainer}>
       <Checkbox
@@ -18,7 +27,13 @@ function TaskItem({ taskItem, onCompletionStageChanged }) {
       >
         {taskItem.taskName}
       </Checkbox>
-      <p>{appContextValue.appName}</p>
+
+      {taskItem.isCompleted ? null : (
+        <AiFillStar
+          onClick={handleFavStatus}
+          style={{ color: taskItem.isFavourite ? "orange" : "gainsboro" }}
+        />
+      )}
     </div>
   );
 }

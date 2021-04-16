@@ -22,14 +22,21 @@ function App() {
     setTaskList(newTasklist);
   };
 
+  const changeFavorite = (id, value) => {
+    const newTaskList = taskList.map((el) =>
+      el.id === id ? { ...el, isFavorite: value } : el
+    );
+    setTaskList(newTaskList);
+    console.log(value);
+  };
   const partitions = _.partition(taskList, (task) => task.isCompleted);
 
-  const tasksCompleted = _.orderBy(partitions[0], ["createdDate"], ["desc"]);
+  const tasksCompleted = _.orderBy(partitions[0], ["completedDate"], ["desc"]);
 
   const tasksNotCompleted = _.orderBy(
     partitions[1],
-    ["completedDate"],
-    ["desc"]
+    ["isFavorite", "createdDate"],
+    ["desc", "desc"]
   );
 
   const handleAddTask = (newTaskName) => {
@@ -40,35 +47,32 @@ function App() {
         id: uuidv4(),
         isCompleted: false,
         createdDate: new Date(),
+        isFavorite: 0,
       },
     ]);
   };
   return (
-    <TodoAppContext.Provider
-      value={{
-        appName: "App todo của tôi",
-      }}
-    >
-      <div className={classes.app}>
-        <Title className={classes.header}>Todo app</Title>
-        <div className={classes.taskInputContainer}>
-          <TaskInput handleAddTask={handleAddTask} />
-        </div>
-        <section className={classes.taskListContainer}>
-          <TodoList
-            changeStatus={changeStatus}
-            taskList={tasksNotCompleted}
-            title={"Danh sách task"}
-          />
-
-          <TodoList
-            changeStatus={changeStatus}
-            taskList={tasksCompleted}
-            title={"Danh sách task hoàn thành"}
-          />
-        </section>
+    <div className={classes.app}>
+      <Title className={classes.header}>Todo app</Title>
+      <div className={classes.taskInputContainer}>
+        <TaskInput handleAddTask={handleAddTask} />
       </div>
-    </TodoAppContext.Provider>
+      <section className={classes.taskListContainer}>
+        <TodoList
+          changeStatus={changeStatus}
+          changeFavorite={changeFavorite}
+          taskList={tasksNotCompleted}
+          title={"Danh sách task"}
+        />
+
+        <TodoList
+          changeStatus={changeStatus}
+          changeFavorite={changeFavorite}
+          taskList={tasksCompleted}
+          title={"Danh sách task hoàn thành"}
+        />
+      </section>
+    </div>
   );
 }
 

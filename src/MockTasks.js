@@ -6,6 +6,7 @@ const MockTask = [
     isCompleted: false,
     createdDate: new Date("04/13/2021"),
     completedDate: "",
+    isFavorite: 0,
   },
   {
     id: uuidv4(),
@@ -13,6 +14,7 @@ const MockTask = [
     isCompleted: false,
     createdDate: new Date("04/12/2021"),
     completedDate: "",
+    isFavorite: 1,
   },
   {
     id: uuidv4(),
@@ -20,6 +22,7 @@ const MockTask = [
     isCompleted: false,
     createdDate: new Date("04/14/2021"),
     completedDate: "",
+    isFavorite: 0,
   },
 ];
 export default MockTask;

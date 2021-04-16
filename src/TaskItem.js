@@ -2,11 +2,17 @@ import { Checkbox } from "antd";
 import { TodoAppContext } from "./App";
 import React from "react";
 import classes from "./TaskItem.module.css";
-function TaskItem({ taskItem, onCompletionStageChanged }) {
-  const appContextValue = React.useContext(TodoAppContext);
-
+import { Rate } from "antd";
+function TaskItem({
+  taskItem,
+  onCompletionStageChanged,
+  onCompletionChangedFavorite,
+}) {
   const handleChange = (e) => {
     onCompletionStageChanged(taskItem.id, e.target.checked);
+  };
+  const handleChangeFavorite = (e) => {
+    onCompletionChangedFavorite(taskItem.id, e);
   };
   return (
     <div className={classes.todoContainer}>
@@ -18,7 +24,11 @@ function TaskItem({ taskItem, onCompletionStageChanged }) {
       >
         {taskItem.taskName}
       </Checkbox>
-      <p>{appContextValue.appName}</p>
+      <Rate
+        count={1}
+        onChange={handleChangeFavorite}
+        value={taskItem.isFavorite}
+      />
     </div>
   );
 }

@@ -1,19 +1,22 @@
 import { Input } from "antd";
 import React from "react";
-
+import { useDispatch, useSelector } from "react-redux";
+import { ChangeInputValue } from "./redux/ActionCreator";
 function TaskInput({ handleAddTask }) {
-  const [inputValue, setValue] = React.useState("");
+  const dispatch = useDispatch();
+
+  const inputValue = useSelector((store) => store.toDoState.newTaskName);
 
   const handlePressEnter = () => {
     if (inputValue === "") {
       return;
     }
     handleAddTask(inputValue);
-    setValue("");
+    dispatch(ChangeInputValue(""));
   };
 
   const handleOnChange = (e) => {
-    setValue(e.target.value);
+    dispatch(ChangeInputValue(e.target.value));
   };
 
   return (

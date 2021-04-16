@@ -7,6 +7,7 @@ import React, { useState } from "react";
 import MockTask from "./MockTasks";
 import { v4 as uuidv4 } from "uuid";
 import _ from "lodash";
+import Store from "./redux/Store";
 
 export const TodoAppConText = React.createContext();
 

@@ -39,6 +39,7 @@
     ]
   },
   "devDependencies": {
+    "identity-obj-proxy": "^3.0.0",
     "prettier": "2.2.1"
   }
 }

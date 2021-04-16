@@ -10,6 +10,7 @@ dependencies:
   uuid: 8.3.2
   web-vitals: 1.1.1
 devDependencies:
+  identity-obj-proxy: 3.0.0
   prettier: 2.2.1
 lockfileVersion: 5.2
 packages:
@@ -5893,10 +5894,9 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-nmT2T0lljbxdQZfspsno9hgrG3Uir6Ks5afism62poxqBM6sDnMEuPmzTq8XN0OEwqKLLdh1jQI3qyE66Nzb3w==
-  /harmony-reflect/1.6.1:
-    dev: false
+  /harmony-reflect/1.6.2:
     resolution:
-      integrity: sha512-WJTeyp0JzGtHcuMsi7rw2VwtkvLa+JyfEKJCFyfcS0+CDkjQ5lHPu7zEhFZP+PDSRrEgXa5Ah0l1MbgbE41XjA==
+      integrity: sha512-HIp/n38R9kQjDEziXyDTuW3vvoxxyxjxFzXLrBr18uB47GnSt+G9D29fqrpM5ZkspMcPICud3XsBJQ4Y2URg8g==
   /has-bigints/1.0.1:
     dev: false
     resolution:
@@ -6197,8 +6197,7 @@ packages:
       integrity: sha512-4aFq7wvWyMHKgxsH8QQtGpvbASCf+eM3wPRLI6R+MgAnTCZ6STYsRvttLvRWK0Nfif5piF394St3HeJDaljGPA==
   /identity-obj-proxy/3.0.0:
     dependencies:
-      harmony-reflect: 1.6.1
-    dev: false
+      harmony-reflect: 1.6.2
     engines:
       node: '>=4'
     resolution:
@@ -12973,6 +12972,7 @@ specifiers:
   '@testing-library/react': ^11.1.0
   '@testing-library/user-event': ^12.1.10
   antd: ^4.15.1
+  identity-obj-proxy: ^3.0.0
   lodash: ^4.17.21
   prettier: 2.2.1
   react: ^17.0.2

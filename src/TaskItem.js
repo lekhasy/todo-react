@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Checkbox } from "antd";
 import classes from "./TaskItem.module.css";
-import { TodoAppConText } from "./App";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 
 function TaskItem({
@@ -9,10 +8,6 @@ function TaskItem({
   onChooseFavouriteTask,
   onCompletionStageChanged,
 }) {
-  const appContextValue = React.useContext(TodoAppConText);
-
-  const [starState, setStarState] = useState();
-
   const handleChange = (e) => {
     onCompletionStageChanged(taskItem.id, e.target.checked);
   };
@@ -32,7 +27,6 @@ function TaskItem({
       >
         {taskItem.taskName}
       </Checkbox>
-      {/* <p>{appContextValue.appName}</p> */}
       <Checkbox
         className={taskItem.isCompleted ? classes.hideStarFav : classes.starFav}
         onChange={handleFavStatus}

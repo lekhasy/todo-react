@@ -20,14 +20,21 @@ function App() {
     setTaskList(newTasklist);
   };
 
+  const changeFavorite = (id, value) => {
+    const newTaskList = taskList.map((el) =>
+      el.id === id ? { ...el, isFavorite: value } : el
+    );
+    setTaskList(newTaskList);
+    console.log(value);
+  };
   const partitions = _.partition(taskList, (task) => task.isCompleted);
 
   const tasksCompleted = _.orderBy(partitions[0], ["createdDate"], ["desc"]);
 
   const tasksNotCompleted = _.orderBy(
     partitions[1],
-    ["completedDate"],
-    ["desc"]
+    ["completedDate", "isFavorite"],
+    ["desc", "desc"]
   );
 
   const handleAddTask = (newTaskName) => {
@@ -50,12 +57,14 @@ function App() {
       <section className={classes.taskListContainer}>
         <TodoList
           changeStatus={changeStatus}
+          changeFavorite={changeFavorite}
           taskList={tasksNotCompleted}
           title={"Danh sách task"}
         />
 
         <TodoList
           changeStatus={changeStatus}
+          changeFavorite={changeFavorite}
           taskList={tasksCompleted}
           title={"Danh sách task hoàn thành"}
         />

@@ -8,7 +8,7 @@ import MockTask from "./MockTasks";
 import { v4 as uuidv4 } from "uuid";
 import _ from "lodash";
 
-export const TodoAppContext = React.createContext();
+export const TodoAppConText = React.createContext();
 
 function App() {
   const [taskList, setTaskList] = useState(MockTask);
@@ -22,14 +22,21 @@ function App() {
     setTaskList(newTasklist);
   };
 
+  const chooseFav = (id, value) => {
+    const newTasklist = taskList.map((el) =>
+      el.id === id ? { ...el, isFavourite: value } : el
+    );
+    setTaskList(newTasklist);
+  };
+
   const partitions = _.partition(taskList, (task) => task.isCompleted);
 
   const tasksCompleted = _.orderBy(partitions[0], ["createdDate"], ["desc"]);
 
   const tasksNotCompleted = _.orderBy(
     partitions[1],
-    ["completedDate"],
-    ["desc"]
+    ["isFavourite", "completedDate"],
+    ["desc", "desc"]
   );
 
   const handleAddTask = (newTaskName) => {
@@ -39,16 +46,13 @@ function App() {
         taskName: newTaskName,
         id: uuidv4(),
         isCompleted: false,
+        isFavourite: false,
         createdDate: new Date(),
       },
     ]);
   };
   return (
-    <TodoAppContext.Provider
-      value={{
-        appName: "App todo của tôi",
-      }}
-    >
+    <TodoAppConText.Provider value={{ appName: "My Todo App" }}>
       <div className={classes.app}>
         <Title className={classes.header}>Todo app</Title>
         <div className={classes.taskInputContainer}>
@@ -57,6 +61,7 @@ function App() {
         <section className={classes.taskListContainer}>
           <TodoList
             changeStatus={changeStatus}
+            chooseFav={chooseFav}
             taskList={tasksNotCompleted}
             title={"Danh sách task"}
           />
@@ -64,11 +69,12 @@ function App() {
           <TodoList
             changeStatus={changeStatus}
             taskList={tasksCompleted}
+            chooseFav={chooseFav}
             title={"Danh sách task hoàn thành"}
           />
         </section>
       </div>
-    </TodoAppContext.Provider>
+    </TodoAppConText.Provider>
   );
 }
 

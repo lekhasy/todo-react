@@ -1,5 +1,4 @@
 import { Checkbox } from "antd";
-import { TodoAppContext } from "./App";
 import React from "react";
 import classes from "./TaskItem.module.css";
 import { Rate } from "antd";

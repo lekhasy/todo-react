@@ -13,7 +13,7 @@ function TaskItem({
   };
 
   const handleFavStatus = (e) => {
-      onChooseFavouriteTask(taskItem.id, e.target.checked);
+    onChooseFavouriteTask(taskItem.id, e.target.checked);
     console.log(e.target.checked);
   };
 

@@ -62,7 +62,7 @@ function App() {
           changeStatus={changeStatus}
           changeFavorite={changeFavorite}
           taskList={tasksNotCompleted}
-          title={"Danh sách task"}
+          title={"Danh sách các task"}
         />
 
         <TodoList

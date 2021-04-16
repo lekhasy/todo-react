@@ -29,11 +29,11 @@ function App() {
   };
   const partitions = _.partition(taskList, (task) => task.isCompleted);
 
-  const tasksCompleted = _.orderBy(partitions[0], ["createdDate"], ["desc"]);
+  const tasksCompleted = _.orderBy(partitions[0], ["completedDate"], ["desc"]);
 
   const tasksNotCompleted = _.orderBy(
     partitions[1],
-    ["completedDate", "isFavorite"],
+    ["isFavorite","createdDate"],
     ["desc", "desc"]
   );
 
@@ -45,6 +45,7 @@ function App() {
         id: uuidv4(),
         isCompleted: false,
         createdDate: new Date(),
+        isFavorite: 0
       },
     ]);
   };

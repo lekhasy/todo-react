@@ -16,6 +16,7 @@ function TodoList(props) {
       <div className={classes.todoListContainer}>
         {taskList.map((task) => (
           <TaskItem
+            key={task.id}
             taskItem={task}
             onChooseFavouriteTask={onChooseFavouriteTask}
             onCompletionStageChanged={onCompletionStageChanged}

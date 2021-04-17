@@ -7,27 +7,34 @@ import React, { useState } from "react";
 import MockTask from "./MockTasks";
 import { v4 as uuidv4 } from "uuid";
 import _ from "lodash";
-import Store from "./redux/Store";
+import { useDispatch, useSelector } from "react-redux";
+import { SetTaskList } from "./redux/ActionCreator";
 
 export const TodoAppConText = React.createContext();
 
 function App() {
-  const [taskList, setTaskList] = useState(MockTask);
+  // const [taskList, setTaskList] = useState(MockTask);
 
+  const dispatch = useDispatch();
+
+  const taskList = useSelector((store) => store.setTaskState.taskList);
+  console.log(taskList);
   const changeStatus = (id, value) => {
     const newTasklist = taskList.map((el) =>
       el.id === id
         ? { ...el, isCompleted: value, completedDate: value ? new Date() : "" }
         : el
     );
-    setTaskList(newTasklist);
+    // setTaskList(newTasklist);
+    dispatch(SetTaskList(newTasklist));
   };
 
   const chooseFav = (id, value) => {
     const newTasklist = taskList.map((el) =>
       el.id === id ? { ...el, isFavourite: value } : el
     );
-    setTaskList(newTasklist);
+    // setTaskList(newTasklist);
+    dispatch(SetTaskList(newTasklist));
   };
 
   const partitions = _.partition(taskList, (task) => task.isCompleted);
@@ -41,7 +48,8 @@ function App() {
   );
 
   const handleAddTask = (newTaskName) => {
-    setTaskList([
+    // setTaskList
+    dispatch(SetTaskList([
       ...taskList,
       {
         taskName: newTaskName,
@@ -50,7 +58,7 @@ function App() {
         isFavourite: false,
         createdDate: new Date(),
       },
-    ]);
+    ]));
   };
   return (
     <TodoAppConText.Provider value={{ appName: "My Todo App" }}>

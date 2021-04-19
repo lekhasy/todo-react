@@ -1,6 +1,8 @@
+import { ChangeInputValueType } from "./ActionTypes";
+
 export const ChangeInputValue = (newInputValue) => {
   return {
-    type: "Change_Input_Value",
+    type: ChangeInputValueType,
     payload: {
       newInputValue,
     },

@@ -1,11 +1,12 @@
 import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
+import store from "./redux/Store";
 import App from "./App";
 import Store from "./redux/Store";
 
 test("renders learn react link", () => {
   render(
-    <Provider store={Store}>
+    <Provider store={store}>
       <App />
     </Provider>
   );

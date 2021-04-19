@@ -1,9 +1,21 @@
+import React from "react";
 import { Checkbox } from "antd";
 import classes from "./TaskItem.module.css";
-function TaskItem({ taskItem, onCompletionStageChanged }) {
+import { AiFillStar } from "react-icons/ai";
+
+function TaskItem({
+  taskItem,
+  onChooseFavouriteTask,
+  onCompletionStageChanged,
+}) {
   const handleChange = (e) => {
-    onCompletionStageChanged(taskItem.id, e.target.checked);
+    onCompletionStageChanged(taskItem.id, !taskItem.isCompleted);
   };
+
+  const handleFavStatus = (e) => {
+    onChooseFavouriteTask(taskItem.id, !taskItem.isFavourite);
+  };
+
   return (
     <div className={classes.todoContainer}>
       <Checkbox
@@ -14,6 +26,13 @@ function TaskItem({ taskItem, onCompletionStageChanged }) {
       >
         {taskItem.taskName}
       </Checkbox>
+
+      {taskItem.isCompleted ? null : (
+        <AiFillStar
+          onClick={handleFavStatus}
+          style={{ color: taskItem.isFavourite ? "orange" : "gainsboro" }}
+        />
+      )}
     </div>
   );
 }

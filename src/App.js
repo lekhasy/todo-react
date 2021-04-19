@@ -3,65 +3,67 @@ import "antd/dist/antd.css";
 import TaskInput from "./TaskInput";
 import Title from "antd/lib/typography/Title";
 import TodoList from "./TodoList";
-import React, { useState } from "react";
-import MockTask from "./MockTasks";
-import { v4 as uuidv4 } from "uuid";
+import React from "react";
 import _ from "lodash";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  AddNewTask,
+  ChangeStatusComplete,
+  ChooseFavouriteTask,
+} from "./redux/ActionCreator";
+
+export const TodoAppConText = React.createContext({
+  appName: "Default App Name",
+});
 
 function App() {
-  const [taskList, setTaskList] = useState(MockTask);
+  const dispatch = useDispatch();
+  const taskList = useSelector((store) => store.todoState.taskList);
 
-  const changeStatus = (id, value) => {
-    const newTasklist = taskList.map((el) =>
-      el.id === id
-        ? { ...el, isCompleted: value, completedDate: value ? new Date() : "" }
-        : el
-    );
-    setTaskList(newTasklist);
-  };
+  const partitions = _.partition(taskList, (task) => task.isCompleted);
+
+  const tasksCompleted = _.orderBy(partitions[0], ["createdDate"], ["desc"]);
 
   const tasksNotCompleted = _.orderBy(
-    taskList.filter((e) => e.isCompleted === false),
-    ["createdDate"],
-    ["desc"]
-  );
-  const tasksCompleted = _.orderBy(
-    taskList.filter((e) => e.isCompleted === true),
-    ["completedDate"],
-    ["desc"]
+    partitions[1],
+    ["isFavourite", "createdDate"],
+    ["desc", "desc"]
   );
 
-  const handleAddTask = (newTaskName) => {
-    setTaskList([
-      ...taskList,
-      {
-        taskName: newTaskName,
-        id: uuidv4(),
-        isCompleted: false,
-        createdDate: new Date(),
-      },
-    ]);
+  const changeStatus = (id, value) => {
+    dispatch(ChangeStatusComplete(id, value));
+  };
+
+  const chooseFav = (id, value) => {
+    dispatch(ChooseFavouriteTask(id, value));
+  };
+  const handleAddTask = (inputValue) => {
+    dispatch(AddNewTask(inputValue));
   };
   return (
-    <div className={classes.app}>
-      <Title className={classes.header}>Todo app</Title>
-      <div className={classes.taskInputContainer}>
-        <TaskInput handleAddTask={handleAddTask} />
-      </div>
-      <section className={classes.taskListContainer}>
-        <TodoList
-          changeStatus={changeStatus}
-          taskList={tasksNotCompleted}
-          title={"Danh sách task"}
-        />
+    <TodoAppConText.Provider value={{ appName: "My Todo App" }}>
+      <div className={classes.app}>
+        <Title className={classes.header}>Todo app</Title>
+        <div className={classes.taskInputContainer}>
+          <TaskInput handleAddTask={handleAddTask} />
+        </div>
+        <section className={classes.taskListContainer}>
+          <TodoList
+            changeStatus={changeStatus}
+            chooseFav={chooseFav}
+            taskList={tasksNotCompleted}
+            title={"Danh sách task"}
+          />
 
-        <TodoList
-          changeStatus={changeStatus}
-          taskList={tasksCompleted}
-          title={"Danh sách task hoàn thành"}
-        />
-      </section>
-    </div>
+          <TodoList
+            changeStatus={changeStatus}
+            taskList={tasksCompleted}
+            chooseFav={chooseFav}
+            title={"Danh sách task hoàn thành"}
+          />
+        </section>
+      </div>
+    </TodoAppConText.Provider>
   );
 }
 

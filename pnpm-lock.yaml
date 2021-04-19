@@ -6,9 +6,15 @@ dependencies:
   lodash: 4.17.21
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
+  react-icons: 4.2.0_react@17.0.2
+  react-redux: 7.2.3_8436876974e3dcafae98d64b636de192
   react-scripts: 4.0.3_react@17.0.2
+  redux: 4.0.5
   uuid: 8.3.2
   web-vitals: 1.1.1
+devDependencies:
+  identity-obj-proxy: 3.0.0
+  prettier: 2.2.1
 lockfileVersion: 5.2
 packages:
   /@ant-design/colors/6.0.0:
@@ -1981,6 +1987,13 @@ packages:
     dev: false
     resolution:
       integrity: sha512-anKkLmZZ+xm4p8JWBf4hElkM4XR+EZeA2M9BAkkTldmcyDY4mbdIJnRghDJH3Ov5ooY7/UAoENtmdMSkaAd7Cw==
+  /@types/hoist-non-react-statics/3.3.1:
+    dependencies:
+      '@types/react': 17.0.3
+      hoist-non-react-statics: 3.3.2
+    dev: false
+    resolution:
+      integrity: sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA==
   /@types/html-minifier-terser/5.1.1:
     dev: false
     resolution:
@@ -2036,16 +2049,41 @@ packages:
     dev: false
     resolution:
       integrity: sha512-PijRCG/K3s3w1We6ynUKdxEc5AcuuH3NBmMDP8uvKVp6X43UY7NQlTzczakXP3DJR0F4dfNQIGjU2cUeRYs2AA==
+  /@types/prop-types/15.7.3:
+    dev: false
+    resolution:
+      integrity: sha512-KfRL3PuHmqQLOG+2tGpRO26Ctg+Cq1E01D2DMriKEATHgWLfeNDmq9e29Q9WIky0dQ3NPkd1mzYH8Lm936Z9qw==
   /@types/q/1.5.4:
     dev: false
     resolution:
       integrity: sha512-1HcDas8SEj4z1Wc696tH56G8OlRaH/sqZOynNNB+HF0WOeXPaxTtbYzJY2oEfiUxjSKjhCKr+MvR7dCHcEelug==
+  /@types/react-redux/7.1.16:
+    dependencies:
+      '@types/hoist-non-react-statics': 3.3.1
+      '@types/react': 17.0.3
+      hoist-non-react-statics: 3.3.2
+      redux: 4.0.5
+    dev: false
+    resolution:
+      integrity: sha512-f/FKzIrZwZk7YEO9E1yoxIuDNRiDducxkFlkw/GNMGEnK9n4K8wJzlJBghpSuOVDgEUHoDkDF7Gi9lHNQR4siw==
+  /@types/react/17.0.3:
+    dependencies:
+      '@types/prop-types': 15.7.3
+      '@types/scheduler': 0.16.1
+      csstype: 3.0.7
+    dev: false
+    resolution:
+      integrity: sha512-wYOUxIgs2HZZ0ACNiIayItyluADNbONl7kt8lkLjVK8IitMH5QMyAh75Fwhmo37r1m7L2JaFj03sIfxBVDvRAg==
   /@types/resolve/0.0.8:
     dependencies:
       '@types/node': 14.14.37
     dev: false
     resolution:
       integrity: sha512-auApPaJf3NPfe18hSoJkp8EbZzer2ISk7o8mCC3M9he/a04+gbMF97NkpD2S8riMGvm4BMRI59/SZQSaLTKpsQ==
+  /@types/scheduler/0.16.1:
+    dev: false
+    resolution:
+      integrity: sha512-EaCxbanVeyxDRTQBkdLb3Bvl/HK7PBK6UJjsSixB0iHKoWxE5uu2Q/DgtpOhPIojN0Zl1whvOd7PoHs2P0s5eA==
   /@types/source-list-map/0.1.2:
     dev: false
     resolution:
@@ -4251,6 +4289,10 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-AZL67abkUzIuvcHqk7c09cezpGNcxUxU4Ioi/05xHk4DQeTkWmGYftIE6ctU6AEt+Gn4n1lDStOtj7FKycP71A==
+  /csstype/3.0.7:
+    dev: false
+    resolution:
+      integrity: sha512-KxnUB0ZMlnUWCsx2Z8MUsr6qV6ja1w9ArPErJaJaF8a5SOWoHLIszeCTKGRGRgtLgYrs1E8CHkNSP1VZTTPc9g==
   /cyclist/1.0.1:
     dev: false
     resolution:
@@ -5891,10 +5933,9 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-nmT2T0lljbxdQZfspsno9hgrG3Uir6Ks5afism62poxqBM6sDnMEuPmzTq8XN0OEwqKLLdh1jQI3qyE66Nzb3w==
-  /harmony-reflect/1.6.1:
-    dev: false
+  /harmony-reflect/1.6.2:
     resolution:
-      integrity: sha512-WJTeyp0JzGtHcuMsi7rw2VwtkvLa+JyfEKJCFyfcS0+CDkjQ5lHPu7zEhFZP+PDSRrEgXa5Ah0l1MbgbE41XjA==
+      integrity: sha512-HIp/n38R9kQjDEziXyDTuW3vvoxxyxjxFzXLrBr18uB47GnSt+G9D29fqrpM5ZkspMcPICud3XsBJQ4Y2URg8g==
   /has-bigints/1.0.1:
     dev: false
     resolution:
@@ -6195,8 +6236,7 @@ packages:
       integrity: sha512-4aFq7wvWyMHKgxsH8QQtGpvbASCf+eM3wPRLI6R+MgAnTCZ6STYsRvttLvRWK0Nfif5piF394St3HeJDaljGPA==
   /identity-obj-proxy/3.0.0:
     dependencies:
-      harmony-reflect: 1.6.1
-    dev: false
+      harmony-reflect: 1.6.2
     engines:
       node: '>=4'
     resolution:
@@ -9555,6 +9595,13 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-1PRWKwzjaW5BrFLQ4ALlemNdxtw=
+  /prettier/2.2.1:
+    dev: true
+    engines:
+      node: '>=10.13.0'
+    hasBin: true
+    resolution:
+      integrity: sha512-PqyhM2yCjg/oKkFPtTGUojv7gnZAoG80ttl45O6x2Ug/rMJw4wcc9k6aaf2hibP7BGVCCM33gZoGjyvt9mm16Q==
   /pretty-bytes/5.6.0:
     dev: false
     engines:
@@ -10339,6 +10386,14 @@ packages:
     dev: false
     resolution:
       integrity: sha512-nQTTcUu+ATDbrSD1BZHr5kgSD4oF8OFjxun8uAaL8RwPBacGBNPf/yAuVVdx17N8XNzRDMrZ9XcKZHCjPW+9ew==
+  /react-icons/4.2.0_react@17.0.2:
+    dependencies:
+      react: 17.0.2
+    dev: false
+    peerDependencies:
+      react: '*'
+    resolution:
+      integrity: sha512-rmzEDFt+AVXRzD7zDE21gcxyBizD/3NqjbX6cmViAgdqfJ2UiLer8927/QhhrXQV7dEj/1EGuOTPp7JnLYVJKQ==
   /react-is/16.13.1:
     dev: false
     resolution:
@@ -10347,6 +10402,30 @@ packages:
     dev: false
     resolution:
       integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
+  /react-redux/7.2.3_8436876974e3dcafae98d64b636de192:
+    dependencies:
+      '@babel/runtime': 7.13.10
+      '@types/react-redux': 7.1.16
+      hoist-non-react-statics: 3.3.2
+      loose-envify: 1.4.0
+      prop-types: 15.7.2
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      react-is: 16.13.1
+      redux: 4.0.5
+    dev: false
+    peerDependencies:
+      react: ^16.8.3 || ^17
+      react-dom: '*'
+      react-native: '*'
+      redux: ^2.0.0 || ^3.0.0 || ^4.0.0-0
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    resolution:
+      integrity: sha512-ZhAmQ1lrK+Pyi0ZXNMUZuYxYAZd59wFuVDGUt536kSGdD0ya9Q7BfsE95E3TsFLE3kOSFp5m6G5qbatE+Ic1+w==
   /react-refresh/0.8.3:
     dev: false
     engines:
@@ -10535,6 +10614,13 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-6tDA8g98We0zd0GvVeMT9arEOnTw9qM03L9cJXaCjrip1OO764RDBLBfrB4cwzNGDj5OA5ioymC9GkizgWJDUg==
+  /redux/4.0.5:
+    dependencies:
+      loose-envify: 1.4.0
+      symbol-observable: 1.2.0
+    dev: false
+    resolution:
+      integrity: sha512-VSz1uMAH24DM6MF72vcojpYPtrTUu3ByVWfPL1nPfVRb5mZVTve5GnNCUV53QM/BZ66xfWrm0CTWoM+Xlz8V1w==
   /regenerate-unicode-properties/8.2.0:
     dependencies:
       regenerate: 1.4.2
@@ -11745,6 +11831,12 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-yhy/sQYxR5BkC98CY7o31VGsg014AKLEPxdfhora76l36hD9Rdy5NZA/Ocn6yayNPgSamYdtX2rFJdcv07AYVw==
+  /symbol-observable/1.2.0:
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha512-e900nM8RRtGhlV36KGEU9k65K3mPb1WV70OdjfxlG2EAuM1noi/E/BaW/uMhL7bPEssK8QV57vN3esixjUvcXQ==
   /symbol-tree/3.2.4:
     dev: false
     resolution:
@@ -12964,9 +13056,14 @@ specifiers:
   '@testing-library/react': ^11.1.0
   '@testing-library/user-event': ^12.1.10
   antd: ^4.15.1
+  identity-obj-proxy: ^3.0.0
   lodash: ^4.17.21
+  prettier: 2.2.1
   react: ^17.0.2
   react-dom: ^17.0.2
+  react-icons: ^4.2.0
+  react-redux: ^7.2.3
   react-scripts: 4.0.3
+  redux: ^4.0.5
   uuid: ^8.3.2
   web-vitals: ^1.0.1

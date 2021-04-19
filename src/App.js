@@ -13,8 +13,6 @@ import { SetTaskList } from "./redux/ActionCreator";
 export const TodoAppConText = React.createContext();
 
 function App() {
-  // const [taskList, setTaskList] = useState(MockTask);
-
   const dispatch = useDispatch();
 
   const taskList = useSelector((store) => store.setTaskState.taskList);
@@ -25,7 +23,7 @@ function App() {
         ? { ...el, isCompleted: value, completedDate: value ? new Date() : "" }
         : el
     );
-    // setTaskList(newTasklist);
+
     dispatch(SetTaskList(newTasklist));
   };
 
@@ -33,7 +31,7 @@ function App() {
     const newTasklist = taskList.map((el) =>
       el.id === id ? { ...el, isFavourite: value } : el
     );
-    // setTaskList(newTasklist);
+
     dispatch(SetTaskList(newTasklist));
   };
 
@@ -48,17 +46,18 @@ function App() {
   );
 
   const handleAddTask = (newTaskName) => {
-    // setTaskList
-    dispatch(SetTaskList([
-      ...taskList,
-      {
-        taskName: newTaskName,
-        id: uuidv4(),
-        isCompleted: false,
-        isFavourite: false,
-        createdDate: new Date(),
-      },
-    ]));
+    dispatch(
+      SetTaskList([
+        ...taskList,
+        {
+          taskName: newTaskName,
+          id: uuidv4(),
+          isCompleted: false,
+          isFavourite: false,
+          createdDate: new Date(),
+        },
+      ])
+    );
   };
   return (
     <TodoAppConText.Provider value={{ appName: "My Todo App" }}>

@@ -11,6 +11,7 @@ import Login from "./Login";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { ChangeStatusLogIn } from "./redux/ActionCreator";
+import AppHeader from "./AppHeader";
 export const TodoAppConText = React.createContext({
   appName: "Default App Name",
 });
@@ -40,10 +41,10 @@ function App() {
 
   const dispatch = useDispatch();
 
-  const handleLogOut = () => {
-    dispatch(ChangeStatusLogIn(false));
-    localStorage.setItem("isLoggIn", false);
-  };
+  // const handleLogOut = () => {
+  //   dispatch(ChangeStatusLogIn(false));
+  //   localStorage.setItem("isLoggIn", false);
+  // };
 
   return (
     <TodoAppConText.Provider value={{ appName: "My Todo App" }}>
@@ -51,8 +52,7 @@ function App() {
         <Router>
           <Switch>
             <Route path="/home">
-              <Title className={classes.header}>Todo app</Title>
-              <Button onClick={handleLogOut}>Logout</Button>
+              <AppHeader></AppHeader>
               <div className={classes.taskInputContainer}>
                 <TaskInput />
               </div>

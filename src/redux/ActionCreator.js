@@ -5,6 +5,7 @@ import {
   ChangeStatusCompleteValue,
   ChooseFavouriteTaskValue,
   ChangeStatusLogInValue,
+  ChangeStatusLogOutValue,
 } from "./ActionType";
 
 export const ChangeInputValue = (newInputValue) => {
@@ -55,6 +56,15 @@ export const ChooseFavouriteTask = (id, value) => {
 export const ChangeStatusLogIn = (value) => {
   return {
     type: ChangeStatusLogInValue,
+    payload: {
+      value,
+    },
+  };
+};
+
+export const ChangeStatusLogOut = (value) => {
+  return {
+    type: ChangeStatusLogOutValue,
     payload: {
       value,
     },

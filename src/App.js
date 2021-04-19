@@ -3,31 +3,20 @@ import "antd/dist/antd.css";
 import TaskInput from "./TaskInput";
 import Title from "antd/lib/typography/Title";
 import TodoList from "./TodoList";
-import React, { useState } from "react";
-import MockTask from "./MockTasks";
-import { v4 as uuidv4 } from "uuid";
+import React from "react";
 import _ from "lodash";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  AddNewTask,
+  ChangeStatusComplete,
+  ChooseFavouriteTask,
+} from "./redux/ActionCreator";
 
 export const TodoAppConText = React.createContext();
 
 function App() {
-  const [taskList, setTaskList] = useState(MockTask);
-
-  const changeStatus = (id, value) => {
-    const newTasklist = taskList.map((el) =>
-      el.id === id
-        ? { ...el, isCompleted: value, completedDate: value ? new Date() : "" }
-        : el
-    );
-    setTaskList(newTasklist);
-  };
-
-  const chooseFav = (id, value) => {
-    const newTasklist = taskList.map((el) =>
-      el.id === id ? { ...el, isFavourite: value } : el
-    );
-    setTaskList(newTasklist);
-  };
+  const dispatch = useDispatch();
+  const taskList = useSelector((store) => store.todoState.taskList);
 
   const partitions = _.partition(taskList, (task) => task.isCompleted);
 
@@ -35,21 +24,19 @@ function App() {
 
   const tasksNotCompleted = _.orderBy(
     partitions[1],
-    ["isFavourite", "completedDate"],
+    ["isFavourite", "createdDate"],
     ["desc", "desc"]
   );
 
-  const handleAddTask = (newTaskName) => {
-    setTaskList([
-      ...taskList,
-      {
-        taskName: newTaskName,
-        id: uuidv4(),
-        isCompleted: false,
-        isFavourite: false,
-        createdDate: new Date(),
-      },
-    ]);
+  const changeStatus = (id, value) => {
+    dispatch(ChangeStatusComplete(id, value));
+  };
+
+  const chooseFav = (id, value) => {
+    dispatch(ChooseFavouriteTask(id, value));
+  };
+  const handleAddTask = (inputValue) => {
+    dispatch(AddNewTask(inputValue));
   };
   return (
     <TodoAppConText.Provider value={{ appName: "My Todo App" }}>

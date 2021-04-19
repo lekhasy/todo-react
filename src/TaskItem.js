@@ -9,12 +9,11 @@ function TaskItem({
   onCompletionStageChanged,
 }) {
   const handleChange = (e) => {
-    onCompletionStageChanged(taskItem.id, e.target.checked);
+    onCompletionStageChanged(taskItem.id, !taskItem.isCompleted);
   };
 
   const handleFavStatus = (e) => {
     onChooseFavouriteTask(taskItem.id, !taskItem.isFavourite);
-    console.log(e.target.checked);
   };
 
   return (

@@ -12,7 +12,7 @@ import {
   ChooseFavouriteTask,
 } from "./redux/ActionCreator";
 
-export const TodoAppConText = React.createContext();
+export const TodoAppConText = React.createContext({ appName: "Default App Name" });
 
 function App() {
   const dispatch = useDispatch();

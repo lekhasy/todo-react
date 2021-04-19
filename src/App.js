@@ -37,15 +37,13 @@ function App() {
   const chooseFav = (id, value) => {
     dispatch(ChooseFavouriteTask(id, value));
   };
-  const handleAddTask = (inputValue) => {
-    dispatch(AddNewTask(inputValue));
-  };
+  
   return (
     <TodoAppConText.Provider value={{ appName: "My Todo App" }}>
       <div className={classes.app}>
         <Title className={classes.header}>Todo app</Title>
         <div className={classes.taskInputContainer}>
-          <TaskInput handleAddTask={handleAddTask} />
+          <TaskInput />
         </div>
         <section className={classes.taskListContainer}>
           <TodoList

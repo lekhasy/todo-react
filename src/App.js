@@ -5,19 +5,13 @@ import Title from "antd/lib/typography/Title";
 import TodoList from "./TodoList";
 import React from "react";
 import _ from "lodash";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  AddNewTask,
-  ChangeStatusComplete,
-  ChooseFavouriteTask,
-} from "./redux/ActionCreator";
+import { useSelector } from "react-redux";
 
 export const TodoAppConText = React.createContext({
   appName: "Default App Name",
 });
 
 function App() {
-  const dispatch = useDispatch();
   const taskList = useSelector((store) => store.todoState.taskList);
 
   const partitions = _.partition(taskList, (task) => task.isCompleted);
@@ -30,14 +24,6 @@ function App() {
     ["desc", "desc"]
   );
 
-  const changeStatus = (id, value) => {
-    dispatch(ChangeStatusComplete(id, value));
-  };
-
-  const chooseFav = (id, value) => {
-    dispatch(ChooseFavouriteTask(id, value));
-  };
-  
   return (
     <TodoAppConText.Provider value={{ appName: "My Todo App" }}>
       <div className={classes.app}>
@@ -46,17 +32,10 @@ function App() {
           <TaskInput />
         </div>
         <section className={classes.taskListContainer}>
-          <TodoList
-            changeStatus={changeStatus}
-            chooseFav={chooseFav}
-            taskList={tasksNotCompleted}
-            title={"Danh sách task"}
-          />
+          <TodoList taskList={tasksNotCompleted} title={"Danh sách task"} />
 
           <TodoList
-            changeStatus={changeStatus}
             taskList={tasksCompleted}
-            chooseFav={chooseFav}
             title={"Danh sách task hoàn thành"}
           />
         </section>

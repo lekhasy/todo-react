@@ -1,15 +1,24 @@
 import Title from "antd/lib/typography/Title";
+import { useDispatch } from "react-redux";
+import {
+  ChangeStatusComplete,
+  ChooseFavouriteTask,
+} from "./redux/ActionCreator";
 
 import TaskItem from "./TaskItem";
 import classes from "./TodoList.module.css";
 
 function TodoList(props) {
   const taskList = props.taskList;
+
+  const dispatch = useDispatch();
+
   const onCompletionStageChanged = (id, value) => {
-    props.changeStatus(id, value);
+    dispatch(ChangeStatusComplete(id, value));
   };
+
   const onChooseFavouriteTask = (id, value) => {
-    props.chooseFav(id, value);
+    dispatch(ChooseFavouriteTask(id, value));
   };
   return (
     <div>

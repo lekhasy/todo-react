@@ -24,7 +24,11 @@ export const todo = (
         createdDate: new Date(),
         completedDate: "",
       };
-      return { ...state, taskList: [...state.taskList, newTask] };
+      return {
+        ...state,
+        newTaskName: "",
+        taskList: [...state.taskList, newTask],
+      };
     }
     case ChangeStatusCompleteValue: {
       const newTaskList = state.taskList.map((task) =>

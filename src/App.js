@@ -1,20 +1,12 @@
 import classes from "./App.module.css";
 import "antd/dist/antd.css";
 import TaskInput from "./TaskInput";
-import Title from "antd/lib/typography/Title";
 import TodoList from "./TodoList";
 import React from "react";
 import _ from "lodash";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Login from "./Login";
-import {
-  Route,
-  BrowserRouter as Router,
-  Switch,
-  useHistory,
-} from "react-router-dom";
-import { Button } from "antd";
-import { Logout } from "./redux/ActionCreator";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import AppHeader from "./AppHeader";
 
 export const TodoAppConText = React.createContext({

@@ -1,16 +1,12 @@
 import classes from "./App.module.css";
 import "antd/dist/antd.css";
-import { Button } from "antd";
 import TaskInput from "./TaskInput";
-import Title from "antd/lib/typography/Title";
 import TodoList from "./TodoList";
 import React from "react";
 import _ from "lodash";
 import { useDispatch, useSelector } from "react-redux";
 import Login from "./Login";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useHistory } from "react-router-dom";
-import { ChangeStatusLogIn } from "./redux/ActionCreator";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import AppHeader from "./AppHeader";
 export const TodoAppConText = React.createContext({
   appName: "Default App Name",
@@ -37,20 +33,14 @@ function App() {
     ]);
   }
 
-  const history = useHistory();
-
-  const dispatch = useDispatch();
-
-  // const handleLogOut = () => {
-  //   dispatch(ChangeStatusLogIn(false));
-  //   localStorage.setItem("isLoggIn", false);
-  // };
-
   return (
     <TodoAppConText.Provider value={{ appName: "My Todo App" }}>
       <div className={classes.app}>
         <Router>
           <Switch>
+            <Route exact path="/">
+              <Redirect to="/home" />
+            </Route>
             <Route path="/home">
               <AppHeader></AppHeader>
               <div className={classes.taskInputContainer}>

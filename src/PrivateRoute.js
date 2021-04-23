@@ -1,5 +1,12 @@
-import { Route } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Redirect, Route } from "react-router-dom";
 
 export default function PrivateRoute(props) {
-  return <Route {...props}>{props.children}</Route>;
+  const isLoggedIn = useSelector((store) => store.authState.isLoggedIn);
+
+  return isLoggedIn ? (
+    <Route {...props}>{props.children}</Route>
+  ) : (
+    <Redirect to="/login" />
+  );
 }

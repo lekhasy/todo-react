@@ -55,12 +55,12 @@ export const ChooseFavouriteTask = (id, value) => {
 
 export const AttempLogin = () => {
   return {
-    type: LoginSucces
+    type: LoginSucces,
   };
 };
 
 export const AttempLogout = () => {
   return {
-    type: LogoutSucces
+    type: LogoutSucces,
   };
 };

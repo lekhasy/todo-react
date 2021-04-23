@@ -64,13 +64,13 @@ function App() {
                 />
               </section>
             </PrivateRoute>
-        <Route path="/login">
-          <Login />
-        </Route>
+            <Route path="/login">
+              <Login />
+            </Route>
           </Switch>
         </Router>
-      </div >
-    </TodoAppConText.Provider >
+      </div>
+    </TodoAppConText.Provider>
   );
 }
 

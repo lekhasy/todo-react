@@ -11,7 +11,7 @@ export const auth = (state = { isLoggedIn: false }, action) => {
     }
 
     case LogoutSucces: {
-      localStorage.setItem("isLoggIn", false);
+      localStorage.removeItem("isLoggIn");
       return {
         ...state,
         isLoggedIn: false,

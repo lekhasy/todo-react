@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import Login from "./Login";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import AppHeader from "./AppHeader";
+import PrivateRoute from "./PrivateRoute";
 
 export const TodoAppConText = React.createContext({
   appName: "Default App Name",
@@ -39,10 +40,11 @@ function App() {
       <div className={classes.app}>
         <Router>
           <Switch>
-            <Route path="/home">
-              <div className={classes.header}>
-                <AppHeader />
-              </div>
+            <Route exact path="/">
+              <Redirect to="/home" />
+            </Route>
+            <PrivateRoute path="/home">
+              <AppHeader></AppHeader>
               <div className={classes.taskInputContainer}>
                 <TaskInput />
               </div>
@@ -57,8 +59,7 @@ function App() {
                   title={"Danh sách task hoàn thành"}
                 />
               </section>
-            </Route>
-
+            </PrivateRoute>
             <Route path="/login">
               <Login />
             </Route>

@@ -3,25 +3,37 @@ import "antd/dist/antd.css";
 import React from "react";
 import Login from "./Login";
 import {
-  Route,
   BrowserRouter as Router,
   Switch,
+  Route,
   Redirect,
 } from "react-router-dom";
 import AppHeader from "./AppHeader";
-import Home from "./Home";
-import { useSelector } from "react-redux";
+import PrivateRoute from "./PrivateRoute";
 
 export const TodoAppConText = React.createContext({
   appName: "Default App Name",
 });
 
 function App() {
-  let isLoggedIn = useSelector((store) => store.authState.isLoggedIn);
-  if (isLoggedIn === "false") {
-    isLoggedIn = false;
-  } else if (isLoggedIn === "true") {
-    isLoggedIn = true;
+  const taskList = useSelector((store) => store.todoState.taskList);
+
+  const partitions = _.partition(taskList, (task) => task.isCompleted);
+
+  const tasksCompleted = _.orderBy(partitions[0], ["createdDate"], ["desc"]);
+
+  const newTaskValue = useSelector((store) => store.todoState.newTaskName);
+
+  let tasksNotCompleted = _.orderBy(
+    partitions[1],
+    ["isFavourite", "createdDate"],
+    ["desc", "desc"]
+  );
+
+  if (newTaskValue) {
+    tasksNotCompleted = tasksNotCompleted.filter((t) =>
+      t.taskName.includes(newTaskValue)
+    );
   }
 
   return (
@@ -32,13 +44,22 @@ function App() {
             <Route exact path="/">
               <Redirect to="/home" />
             </Route>
-            <Route path="/home">
-              {isLoggedIn ? <Home /> : <Redirect to="/login" />}
-              <div className={classes.header}>
-                <AppHeader />
+            <PrivateRoute path="/home">
+              <AppHeader></AppHeader>
+              <div className={classes.taskInputContainer}>
+                <TaskInput />
               </div>
-            </Route>
-
+              <section className={classes.taskListContainer}>
+                <TodoList
+                  taskList={tasksNotCompleted}
+                  title={"Danh sách task"}
+                />
+                <TodoList
+                  taskList={tasksCompleted}
+                  title={"Danh sách task hoàn thành"}
+                />
+              </section>
+            </PrivateRoute>
             <Route path="/login">
               <Login />
             </Route>

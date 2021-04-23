@@ -4,6 +4,8 @@ import {
   GetTasksListValue,
   ChangeStatusCompleteValue,
   ChooseFavouriteTaskValue,
+  LoginSucces,
+  LogoutSucces,
 } from "./ActionType";
 
 export const ChangeInputValue = (newInputValue) => {
@@ -51,20 +53,14 @@ export const ChooseFavouriteTask = (id, value) => {
   };
 };
 
-export const AttempLogin = (isLogedin) => {
+export const AttempLogin = () => {
   return {
-    type: "Login_Succsess",
-    payload: {
-      isLogedin,
-    },
+    type: LoginSucces
   };
 };
 
-export const AttempLogout = (isLogedin) => {
+export const AttempLogout = () => {
   return {
-    type: "Logout_Succsess",
-    payload: {
-      isLogedin,
-    },
+    type: LogoutSucces
   };
 };

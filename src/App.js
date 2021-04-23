@@ -63,8 +63,6 @@ function App() {
                 />
               </section>
             </Route>
-          </Switch>
-          <Switch>
             <Route path="/login">
               <Login />
             </Route>

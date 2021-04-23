@@ -3,6 +3,7 @@ import { LoginSucces, LogoutSucces } from "../ActionType";
 export const auth = (state = { isLoggedIn: false }, action) => {
   switch (action.type) {
     case LoginSucces: {
+      localStorage.setItem("isLoggIn", true);
       return {
         ...state,
         isLoggedIn: true,
@@ -10,6 +11,7 @@ export const auth = (state = { isLoggedIn: false }, action) => {
     }
 
     case LogoutSucces: {
+      localStorage.setItem("isLoggIn", false);
       return {
         ...state,
         isLoggedIn: false,

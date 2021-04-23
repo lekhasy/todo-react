@@ -6,7 +6,12 @@ import React from "react";
 import _ from "lodash";
 import { useSelector } from "react-redux";
 import Login from "./Login";
-import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import AppHeader from "./AppHeader";
 import PrivateRoute from "./PrivateRoute";
 
@@ -17,11 +22,11 @@ export const TodoAppConText = React.createContext({
 function App() {
   const taskList = useSelector((store) => store.todoState.taskList);
 
-  const newTaskValue = useSelector((store) => store.todoState.newTaskName);
-
   const partitions = _.partition(taskList, (task) => task.isCompleted);
 
   const tasksCompleted = _.orderBy(partitions[0], ["createdDate"], ["desc"]);
+
+  const newTaskValue = useSelector((store) => store.todoState.newTaskName);
 
   let tasksNotCompleted = _.orderBy(
     partitions[1],
@@ -53,20 +58,19 @@ function App() {
                   taskList={tasksNotCompleted}
                   title={"Danh sách task"}
                 />
-
                 <TodoList
                   taskList={tasksCompleted}
                   title={"Danh sách task hoàn thành"}
                 />
               </section>
             </PrivateRoute>
-            <Route path="/login">
-              <Login />
-            </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
           </Switch>
         </Router>
-      </div>
-    </TodoAppConText.Provider>
+      </div >
+    </TodoAppConText.Provider >
   );
 }
 

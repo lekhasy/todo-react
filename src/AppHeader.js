@@ -1,25 +1,34 @@
+import classes from "./App.module.css";
+import "antd/dist/antd.css";
+import Title from "antd/lib/typography/Title";
 import { Button } from "antd";
-import Title from "antd/lib/skeleton/Title";
+import React from "react";
 import { useDispatch } from "react-redux";
+import { AttempLogout } from "./redux/ActionCreator";
 import { useHistory } from "react-router";
-import { Logout } from "./redux/ActionCreator";
 
-function AppHeader() {
-  const history = useHistory();
+const AppHeader = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
+  if (!JSON.parse(localStorage.getItem("isLoggIn"))) {
+    history.push("/login");
+  }
+
+  const handleLogout = () => {
+    if (window.confirm("Ban muon dang xuat?")) {
+      dispatch(AttempLogout());
+      history.push("/login");
+    }
+  };
+
   return (
-    <>
-      <Title>Todo app</Title>
-      <Button
-        onClick={() => {
-          history.push("/login");
-          dispatch(Logout());
-        }}
-      >
+    <div className={classes.appHeader}>
+      <Title className={classes.header}>Todo app</Title>
+      <Button className={classes.btn} onClick={handleLogout}>
         Logout
       </Button>
-    </>
+    </div>
   );
-}
+};
 
 export default AppHeader;

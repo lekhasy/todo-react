@@ -15,6 +15,8 @@ export const TodoAppConText = React.createContext({
 function App() {
   const taskList = useSelector((store) => store.todoState.taskList);
 
+  const newTaskValue = useSelector((store) => store.todoState.newTaskName);
+
   const partitions = _.partition(taskList, (task) => task.isCompleted);
 
   const tasksCompleted = _.orderBy(partitions[0], ["createdDate"], ["desc"]);

@@ -14,7 +14,7 @@ function Login() {
 
   const dispatch = useDispatch();
 
-  if (JSON.parse(localStorage.getItem("isLoggIn"))) {
+  if (JSON.parse(localStorage.getItem("isLoggIn?"))) {
     history.push("/home");
   }
 
@@ -24,7 +24,7 @@ function Login() {
       return;
     }
     dispatch(AttempLogin(true));
-    localStorage.setItem("isLoggIn", true);
+    localStorage.setItem("isLoggIn?", true);
     history.push("/home");
   };
 

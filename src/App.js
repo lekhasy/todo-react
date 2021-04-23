@@ -6,7 +6,12 @@ import React from "react";
 import _ from "lodash";
 import { useSelector } from "react-redux";
 import Login from "./Login";
-import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import AppHeader from "./AppHeader";
 
 export const TodoAppConText = React.createContext({
@@ -16,11 +21,11 @@ export const TodoAppConText = React.createContext({
 function App() {
   const taskList = useSelector((store) => store.todoState.taskList);
 
-  const newTaskValue = useSelector((store) => store.todoState.newTaskName);
-
   const partitions = _.partition(taskList, (task) => task.isCompleted);
 
   const tasksCompleted = _.orderBy(partitions[0], ["createdDate"], ["desc"]);
+
+  const newTaskValue = useSelector((store) => store.todoState.newTaskName);
 
   let tasksNotCompleted = _.orderBy(
     partitions[1],
@@ -39,10 +44,11 @@ function App() {
       <div className={classes.app}>
         <Router>
           <Switch>
+            <Route exact path="/">
+              <Redirect to="/home" />
+            </Route>
             <Route path="/home">
-              <div className={classes.header}>
-                <AppHeader />
-              </div>
+              <AppHeader></AppHeader>
               <div className={classes.taskInputContainer}>
                 <TaskInput />
               </div>
@@ -51,14 +57,12 @@ function App() {
                   taskList={tasksNotCompleted}
                   title={"Danh sách task"}
                 />
-
                 <TodoList
                   taskList={tasksCompleted}
                   title={"Danh sách task hoàn thành"}
                 />
               </section>
             </Route>
-
             <Route path="/login">
               <Login />
             </Route>

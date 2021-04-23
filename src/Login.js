@@ -1,9 +1,10 @@
-import { Button } from "antd";
+import Title from "antd/lib/typography/Title";
 import { Input } from "antd";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { LoginSuccess } from "./redux/ActionCreator";
+import { AttempLogin } from "./redux/ActionCreator";
+import { Button } from "antd";
 
 function Login() {
   const [userName, setUserName] = useState("");
@@ -13,17 +14,22 @@ function Login() {
 
   const dispatch = useDispatch();
 
-  const handleLogin = () => {
+  if (JSON.parse(localStorage.getItem("isLoggIn"))) {
+    history.push("/home");
+  }
+
+  const handleLogIn = () => {
     if (!userName || !password) {
-      alert("Tài khoản hoặc mật khẩu không đúng");
+      alert("Sai ten tai khoan mat khau");
       return;
     }
-    dispatch(LoginSuccess());
+    dispatch(AttempLogin());
     history.push("/home");
   };
 
   return (
     <div>
+      <Title>Login</Title>
       <Input
         placeholder="User name"
         value={userName}
@@ -31,10 +37,12 @@ function Login() {
       />
       <Input
         placeholder="password"
+        type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <Button onClick={handleLogin}>Đăng nhập</Button>
+
+      <Button onClick={handleLogIn}>Đăng nhập</Button>
     </div>
   );
 }

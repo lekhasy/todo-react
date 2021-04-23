@@ -1,17 +1,21 @@
-import { AttemptLoginSuccess, AttemptLogout } from "../ActionType";
+import { LoginSucces, LogoutSucces } from "../ActionType";
 
-export const auth = (
-  state = { isLoggedIn: localStorage.getItem("isLoggedIn") },
-  action
-) => {
+export const auth = (state = { isLoggedIn: false }, action) => {
   switch (action.type) {
-    case AttemptLoginSuccess: {
-      localStorage.setItem("isLoggedIn", true);
-      return { ...state, isLoggedIn: true };
+    case LoginSucces: {
+      localStorage.setItem("isLoggIn", true);
+      return {
+        ...state,
+        isLoggedIn: true,
+      };
     }
-    case AttemptLogout: {
-      localStorage.setItem("isLoggedIn", false);
-      return { ...state, isLoggedIn: false };
+
+    case LogoutSucces: {
+      localStorage.setItem("isLoggIn", false);
+      return {
+        ...state,
+        isLoggedIn: false,
+      };
     }
     default:
       return state;

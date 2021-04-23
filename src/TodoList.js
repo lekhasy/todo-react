@@ -20,9 +20,11 @@ function TodoList(props) {
   const onChooseFavouriteTask = (id, value) => {
     dispatch(ChooseFavouriteTask(id, value));
   };
+
   return (
     <div>
       <Title level={3}>{props.title}</Title>
+
       <div className={classes.todoListContainer}>
         {taskList.map((task) => (
           <TaskItem

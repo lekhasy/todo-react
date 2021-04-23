@@ -10,9 +10,6 @@ import { useHistory } from "react-router";
 const AppHeader = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  if (!JSON.parse(localStorage.getItem("isLoggIn"))) {
-    history.push("/login");
-  }
 
   const handleLogout = () => {
     if (window.confirm("Ban muon dang xuat?")) {

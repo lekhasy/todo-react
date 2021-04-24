@@ -14,6 +14,7 @@ import {
 } from "react-router-dom";
 import AppHeader from "./AppHeader";
 import PrivateRoute from "./PrivateRoute";
+import { AxiosPlay } from "./AxiosPlay";
 
 export const TodoAppConText = React.createContext({
   appName: "Default App Name",
@@ -66,6 +67,9 @@ function App() {
             </PrivateRoute>
             <Route path="/login">
               <Login />
+            </Route>
+            <Route path="/axios">
+              <AxiosPlay></AxiosPlay>
             </Route>
           </Switch>
         </Router>

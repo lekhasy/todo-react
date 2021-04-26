@@ -1,9 +1,9 @@
 import { LoginSucces, LogoutSucces } from "../ActionType";
 
-export const auth = (state = { isLoggedIn: false }, action) => {
+export const auth = (state = { isLoggedIn: localStorage.getItem("isLoggedIn") }, action) => {
   switch (action.type) {
     case LoginSucces: {
-      localStorage.setItem("isLoggIn", true);
+      localStorage.setItem("isLoggedIn", true);
       return {
         ...state,
         isLoggedIn: true,
@@ -11,7 +11,7 @@ export const auth = (state = { isLoggedIn: false }, action) => {
     }
 
     case LogoutSucces: {
-      localStorage.setItem("isLoggIn", false);
+      localStorage.removeItem("isLoggedIn");
       return {
         ...state,
         isLoggedIn: false,

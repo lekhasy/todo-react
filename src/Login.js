@@ -1,8 +1,8 @@
 import Title from "antd/lib/typography/Title";
 import { Input } from "antd";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Redirect, useHistory } from "react-router-dom";
 import { AttempLogin } from "./redux/ActionCreator";
 import { Button } from "antd";
 
@@ -14,9 +14,7 @@ function Login() {
 
   const dispatch = useDispatch();
 
-  if (JSON.parse(localStorage.getItem("isLoggIn"))) {
-    history.push("/home");
-  }
+  const isLoggedIn = useSelector(store => store.authState.isLoggedIn);
 
   const handleLogIn = () => {
     if (!userName || !password) {
@@ -28,7 +26,7 @@ function Login() {
   };
 
   return (
-    <div>
+    isLoggedIn ? <Redirect to="/home" /> : <div>
       <Title>Login</Title>
       <Input
         placeholder="User name"

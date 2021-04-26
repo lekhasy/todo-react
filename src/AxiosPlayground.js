@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Input } from "antd";
 
-export const AxiosPlay = () => {
+const AxiosPlayground = () => {
   const [todoNum, setTodoNum] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isErr, setIsErr] = useState(false);
@@ -71,3 +71,5 @@ export const AxiosPlay = () => {
     </>
   );
 };
+
+export default AxiosPlayground

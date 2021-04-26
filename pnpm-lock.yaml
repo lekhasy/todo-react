@@ -17,6 +17,7 @@ specifiers:
   react-router-dom: ^5.2.0
   react-scripts: 4.0.3
   redux: ^4.0.5
+  redux-thunk: ^2.3.0
   uuid: ^8.3.2
   web-vitals: ^1.0.1
 
@@ -35,6 +36,7 @@ dependencies:
   react-router-dom: 5.2.0_react@17.0.2
   react-scripts: 4.0.3_react@17.0.2
   redux: 4.0.5
+  redux-thunk: 2.3.0
   uuid: 8.3.2
   web-vitals: 1.1.1
 
@@ -10243,6 +10245,10 @@ packages:
     dependencies:
       indent-string: 4.0.0
       strip-indent: 3.0.0
+    dev: false
+
+  /redux-thunk/2.3.0:
+    resolution: {integrity: sha512-km6dclyFnmcvxhAcrQV2AkZmPQjzPDjgVlQtR0EQjxZPyJ0BnMf3in1ryuR8A2qU0HldVRfxYXbFSKlI3N7Slw==}
     dev: false
 
   /redux/4.0.5:

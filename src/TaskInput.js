@@ -1,7 +1,12 @@
 import { Input } from "antd";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ChangeInputValue, AddNewTask } from "./redux/ActionCreator";
+import {
+  ChangeInputValue,
+  AddNewTask,
+  AddNewTaskAsync,
+} from "./redux/ActionCreator";
+import TodoService from "./TodoService";
 
 function TaskInput() {
   const dispatch = useDispatch();
@@ -13,7 +18,7 @@ function TaskInput() {
       return;
     }
 
-    dispatch(AddNewTask(inputValue));
+    dispatch(AddNewTaskAsync(inputValue));
   };
 
   const handleOnChange = (e) => {

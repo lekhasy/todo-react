@@ -15,6 +15,7 @@ import {
 import AppHeader from "./AppHeader";
 import PrivateRoute from "./PrivateRoute";
 import AxiosPlayground from "./AxiosPlayground";
+
 export const TodoAppConText = React.createContext({
   appName: "Default App Name",
 });
@@ -45,9 +46,6 @@ function App() {
       <div className={classes.app}>
         <Router>
           <Switch>
-            <Route exact path="/">
-              <Redirect to="/home" />
-            </Route>
             <PrivateRoute path="/home">
               <AppHeader></AppHeader>
               <div className={classes.taskInputContainer}>

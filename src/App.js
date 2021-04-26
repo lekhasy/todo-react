@@ -10,7 +10,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect,
 } from "react-router-dom";
 import AppHeader from "./AppHeader";
 import PrivateRoute from "./PrivateRoute";

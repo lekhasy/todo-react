@@ -1,6 +1,7 @@
+import { Input } from "antd";
 import { Button } from "antd";
-import axios from "axios";
 import { useEffect, useState } from "react";
+import TodoService from "./TodoService";
 
 export default function AxiosPlayground() {
   const [todos, setTodos] = useState([]);
@@ -8,19 +9,14 @@ export default function AxiosPlayground() {
   const [isError, setIsError] = useState(false);
   const [retryCount, setRetryCount] = useState(1);
 
+  const [inputValue, setInputValue] = useState("");
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
         setIsError(false);
-        const todoListResonse = await axios.get(
-          "http://localhost:5000/Todo/GetTodos",
-          {
-            params: {
-              user: "sylk",
-            },
-          }
-        );
+        const todoListResonse = await TodoService.GetTodoList();
 
         setTodos(todoListResonse.data.data);
       } catch (ex) {
@@ -38,12 +34,41 @@ export default function AxiosPlayground() {
     setRetryCount(retryCount + 1);
   };
 
+  const handleOnChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const handlePressEnter = async () => {
+    setIsLoading(true);
+
+    try {
+      await TodoService.AddTodo(inputValue);
+
+      setInputValue("");
+
+      setRetryCount(retryCount + 1);
+    } catch (error) {
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return isLoading ? (
     "Loading ..."
   ) : (
     <>
       {!isError ? (
-        <div>{todos.length}</div>
+        <div>
+          <div>
+            <Input
+              placeholder="Nhập tên task rồi ấn enter"
+              value={inputValue}
+              onChange={handleOnChange}
+              onPressEnter={handlePressEnter}
+            />
+          </div>
+          {todos.length}
+        </div>
       ) : (
         <div>
           <Button onClick={handleTryAgain}>Try again</Button>

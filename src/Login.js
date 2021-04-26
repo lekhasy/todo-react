@@ -14,7 +14,7 @@ function Login() {
 
   const dispatch = useDispatch();
 
-  const isLoggedIn = useSelector(store => store.authState.isLoggedIn);
+  const isLoggedIn = useSelector((store) => store.authState.isLoggedIn);
 
   const handleLogIn = () => {
     if (!userName || !password) {
@@ -25,8 +25,10 @@ function Login() {
     history.push("/home");
   };
 
-  return (
-    isLoggedIn ? <Redirect to="/home" /> : <div>
+  return isLoggedIn ? (
+    <Redirect to="/home" />
+  ) : (
+    <div>
       <Title>Login</Title>
       <Input
         placeholder="User name"

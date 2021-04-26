@@ -72,4 +72,4 @@ const AxiosPlayground = () => {
   );
 };
 
-export default AxiosPlayground
+export default AxiosPlayground;

@@ -1,6 +1,5 @@
 import TodoService from "../TodoService";
 import {
-  AddNewTaskValue,
   ChangeInputValueType,
   GetTasksListValue,
   ChangeStatusCompleteValue,
@@ -24,14 +23,6 @@ export const GetTasksList = (tasksList) => {
     type: GetTasksListValue,
     payload: {
       tasksList,
-    },
-  };
-};
-export const AddNewTask = (newTaskName) => {
-  return {
-    type: AddNewTaskValue,
-    payload: {
-      newTaskName,
     },
   };
 };

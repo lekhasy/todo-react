@@ -17,14 +17,6 @@
   grid-area: header;
 }
 
-.taskInputContainer {
-  grid-area: task-input;
-}
-
-.taskListContainer {
-  grid-area: task-list;
-}
-
 .appHeader {
   display: flex;
   justify-content: space-between;

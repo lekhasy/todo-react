@@ -15,52 +15,20 @@ import {
 import AppHeader from "./AppHeader";
 import PrivateRoute from "./PrivateRoute";
 import AxiosPlayground from "./AxiosPlayground";
+import Home from "./Home";
 
 export const TodoAppConText = React.createContext({
   appName: "Default App Name",
 });
 
 function App() {
-  const taskList = useSelector((store) => store.todoState.taskList);
-
-  const partitions = _.partition(taskList, (task) => task.isCompleted);
-
-  const tasksCompleted = _.orderBy(partitions[0], ["createdDate"], ["desc"]);
-
-  const newTaskValue = useSelector((store) => store.todoState.newTaskName);
-
-  let tasksNotCompleted = _.orderBy(
-    partitions[1],
-    ["isFavourite", "createdDate"],
-    ["desc", "desc"]
-  );
-
-  if (newTaskValue) {
-    tasksNotCompleted = tasksNotCompleted.filter((t) =>
-      t.taskName.includes(newTaskValue)
-    );
-  }
-
   return (
     <TodoAppConText.Provider value={{ appName: "My Todo App" }}>
       <div className={classes.app}>
         <Router>
           <Switch>
             <PrivateRoute path="/home">
-              <AppHeader></AppHeader>
-              <div className={classes.taskInputContainer}>
-                <TaskInput />
-              </div>
-              <section className={classes.taskListContainer}>
-                <TodoList
-                  taskList={tasksNotCompleted}
-                  title={"Danh sách task"}
-                />
-                <TodoList
-                  taskList={tasksCompleted}
-                  title={"Danh sách task hoàn thành"}
-                />
-              </section>
+              <Home />
             </PrivateRoute>
             <Route path="/login">
               <Login />

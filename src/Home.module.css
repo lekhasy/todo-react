@@ -1,0 +1,7 @@
+.taskInputContainer {
+  grid-area: task-input;
+}
+
+.taskListContainer {
+  grid-area: task-list;
+}

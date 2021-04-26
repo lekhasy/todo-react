@@ -5,6 +5,7 @@ specifiers:
   '@testing-library/react': ^11.1.0
   '@testing-library/user-event': ^12.1.10
   antd: ^4.15.1
+  axios: ^0.21.1
   identity-obj-proxy: ^3.0.0
   lodash: ^4.17.21
   prettier: 2.2.1
@@ -24,6 +25,7 @@ dependencies:
   '@testing-library/react': 11.2.6_react-dom@17.0.2+react@17.0.2
   '@testing-library/user-event': 12.8.3
   antd: 4.15.1_react-dom@17.0.2+react@17.0.2
+  axios: 0.21.1
   lodash: 4.17.21
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
@@ -2916,6 +2918,14 @@ packages:
   /axe-core/4.1.4:
     resolution: {integrity: sha512-Pdgfv6iP0gNx9ejRGa3zE7Xgkj/iclXqLfe7BnatdZz0QnLZ3jrRHUVH8wNSdN68w05Sk3ShGTb3ydktMTooig==}
     engines: {node: '>=4'}
+    dev: false
+
+  /axios/0.21.1:
+    resolution: {integrity: sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==}
+    dependencies:
+      follow-redirects: 1.13.3_debug@4.3.1
+    transitivePeerDependencies:
+      - debug
     dev: false
 
   /axobject-query/2.2.0:

@@ -1,19 +1,14 @@
 import axios from "axios";
 import UserServcie from "./UserService";
 
-const apiEndPoint = "http://localhost:5000";
+const apiEndPoint = "https://linhtrinhviet.herokuapp.com/";
 
 const GetTodoList = () => {
-  return axios.get(apiEndPoint + "/Todo/GetTodos", {
-    params: {
-      user: UserServcie.GetUserName(),
-    },
-  });
+  return axios.get(apiEndPoint + "todo");
 };
 
 const AddTodo = (inputValue) => {
-  return axios.post(apiEndPoint + "/Todo/AddTodo", {
-    user: UserServcie.GetUserName(),
+  return axios.post(apiEndPoint + "todo", {
     taskName: inputValue,
   });
 };

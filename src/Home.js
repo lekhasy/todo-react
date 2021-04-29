@@ -1,9 +1,11 @@
 import _ from "lodash";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AppHeader from "./AppHeader";
 import TaskInput from "./TaskInput";
 import TodoList from "./TodoList";
 import classes from "./Home.module.css";
+import { GetData } from "./redux/ActionCreator";
+import { useEffect } from "react";
 
 export default function Home() {
   const taskList = useSelector((store) => store.todoState.taskList);
@@ -26,7 +28,22 @@ export default function Home() {
     );
   }
 
-  return (
+  const dispatch = useDispatch();
+  useEffect(() => dispatch(
+  // {
+  //   type: "Change_Loading",
+  //   payload: {
+  //     isLoading: false
+  //   }
+  // }
+  GetData()
+  )
+  , [])
+
+  const isLoading = useSelector((store) => store.todoState.isLoading);
+  return !true ? (
+    "Loading..."
+  ) : (
     <>
       <AppHeader></AppHeader>
       <div className={classes.taskInputContainer}>

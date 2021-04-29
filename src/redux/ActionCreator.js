@@ -8,6 +8,9 @@ import {
   LogoutSucces,
   BeginAddTodo,
   AddTodoSuccess,
+  GetTodoList,
+  SyncError,
+  GetTodoSuccess,
 } from "./ActionType";
 
 export const ChangeInputValue = (newInputValue) => {
@@ -72,8 +75,26 @@ export const AddNewTaskAsync = (inputValue) => async (dispatch, getState) => {
       },
     });
   } catch (ex) {
-    // ADD_TODO_ERR
+    dispatch({
+      type: SyncError,
+    });
   } finally {
     // END_ADD_TODO
+  }
+};
+
+export const GetData = () => async (dispatch, getState) => {
+  try {
+    const data = await TodoService.GetTodoList();
+    dispatch({
+      type: GetTodoSuccess,
+      payload: {
+        taskList: data.data,
+      },
+    });
+  } catch (err) {
+    dispatch({
+      type: SyncError,
+    });
   }
 };

@@ -4,9 +4,12 @@ import {
   ChooseFavouriteTaskValue,
   BeginAddTodo,
   AddTodoSuccess,
+  SyncError,
+  GetTodoSuccess,
 } from "../ActionType";
 import { v4 as uuidv4 } from "uuid";
 import MockTask from "../../MockTasks";
+import _ from "lodash";
 
 export const todo = (
   state = {
@@ -18,6 +21,21 @@ export const todo = (
   action
 ) => {
   switch (action.type) {
+    case SyncError: {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true
+      }
+    }
+    case GetTodoSuccess: {
+      const taskListGet = action.payload.taskList;
+      return {
+        ...state,
+        taskList: [...state.taskList, ...taskListGet ],
+        isLoading: false
+      };
+    }
     case BeginAddTodo: {
       return {
         ...state,

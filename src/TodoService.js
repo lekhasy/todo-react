@@ -8,8 +8,13 @@ const GetTodoList = () => {
 };
 
 const AddTodo = (inputValue) => {
+  const createDate = new Date();
   return axios.post(apiEndPoint + "todo", {
     taskName: inputValue,
+    isCompleted: false,
+    isFavourite: false,
+    createdDate: createDate,
+    completedDate: ""
   });
 };
 

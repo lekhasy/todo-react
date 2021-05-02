@@ -32,7 +32,7 @@ function TodoList(props) {
     <div>
       <Title level={3}>{props.title}</Title>
       {(props.title === "Danh sách task") && (isLoading && <Spin tip="Loading..."></Spin>)}
-      {(props.title === "Danh sách task") && isError && <Button onClick={() => dispatch(GetData())}>Try again!</Button>}
+      {(props.title === "Danh sách task") && isError && <Button className={classes.btn} onClick={() => dispatch(GetData())}>Try again!</Button>}
       <div className={classes.todoListContainer}>
         {taskList.map((task) => (
           <TaskItem

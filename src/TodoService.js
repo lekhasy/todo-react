@@ -1,15 +1,19 @@
 import axios from "axios";
 import UserServcie from "./UserService";
 
-const apiEndPoint = "https://linhtrinhviet.herokuapp.com/";
+const apiEndPoint = "http://localhost:5000";
 
 const GetTodoList = () => {
-  return axios.get(apiEndPoint + "todo");
+  return axios.get(apiEndPoint + "/Todo/GetTodos", {
+    params: {
+      user: UserServcie.GetUserName(),
+    },
+  });
 };
 
 const AddTodo = (inputValue) => {
   const createDate = new Date();
-  return axios.post(apiEndPoint + "todo", {
+  return axios.post(apiEndPoint + "/Todo/AddTodo", {
     taskName: inputValue,
     isCompleted: false,
     isFavourite: false,
@@ -19,8 +23,9 @@ const AddTodo = (inputValue) => {
 };
 
 const ChooseFavourite = (id, value) => {
-  return axios.patch(apiEndPoint + "todo/" + id,
+  return axios.post(apiEndPoint + "/Todo/ChangeTaskFavoriteState",
   {
+    taskId: id,
     isFavourite: value   
 
   },
@@ -28,8 +33,9 @@ const ChooseFavourite = (id, value) => {
 };
 
 const ChangeStatusComplete = (id, value) => {
-  return axios.patch(apiEndPoint + "todo/" + id,
+  return axios.post(apiEndPoint + "/Todo/ChangeTaskCompletedState" ,
   {
+    taskId: id,
     isCompleted: value   
 
   },

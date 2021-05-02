@@ -114,7 +114,7 @@ export const ChooseFavouriteTaskAsync = (id, value) => async (dispatch, getState
         },
     })
   }catch(err){
-
+    console.log(err);
   }
 
 }
@@ -130,7 +130,7 @@ export const ChangeStatusCompletedAsync = (id, value) => async (dispatch, getSta
         },
     })
   }catch(err){
-
+    console.log(err);
   }
 
 }

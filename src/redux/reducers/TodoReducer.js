@@ -24,15 +24,15 @@ export const todo = (
       return {
         ...state,
         isLoading: false,
-        isError: true
-      }
+        isError: true,
+      };
     }
     case GetTodoSuccess: {
       const taskListGet = action.payload.taskList;
       return {
         ...state,
-        taskList: [...state.taskList, ...taskListGet ],
-        isLoading: false
+        taskList: [...state.taskList, ...taskListGet],
+        isLoading: false,
       };
     }
     case BeginAddTodo: {

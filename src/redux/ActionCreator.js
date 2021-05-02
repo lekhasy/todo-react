@@ -103,34 +103,38 @@ export const GetData = () => async (dispatch, getState) => {
   }
 };
 
-export const ChooseFavouriteTaskAsync = (id, value) => async (dispatch, getState) => {
+export const ChooseFavouriteTaskAsync = (id, value) => async (
+  dispatch,
+  getState
+) => {
   try {
     await TodoService.ChooseFavourite(id, value);
     dispatch({
       type: ChooseFavouriteTaskValue,
-        payload: {
-          id,
-          value,
-        },
-    })
-  }catch(err){
+      payload: {
+        id,
+        value,
+      },
+    });
+  } catch (err) {
     console.log(err);
   }
+};
 
-}
-
-export const ChangeStatusCompletedAsync = (id, value) => async (dispatch, getState) => {
+export const ChangeStatusCompletedAsync = (id, value) => async (
+  dispatch,
+  getState
+) => {
   try {
     await TodoService.ChangeStatusComplete(id, value);
     dispatch({
       type: ChangeStatusCompleteValue,
-        payload: {
-          id,
-          value,
-        },
-    })
-  }catch(err){
+      payload: {
+        id,
+        value,
+      },
+    });
+  } catch (err) {
     console.log(err);
   }
-
-}
+};

@@ -29,12 +29,10 @@ export default function Home() {
   }
 
   const dispatch = useDispatch();
-  useEffect(() => dispatch(
-  GetData()
-  )
-  , [])
+  useEffect(() => dispatch(GetData()), []);
 
-  return <>
+  return (
+    <>
       <AppHeader></AppHeader>
       <div className={classes.taskInputContainer}>
         <TaskInput />
@@ -47,4 +45,5 @@ export default function Home() {
         />
       </section>
     </>
+  );
 }

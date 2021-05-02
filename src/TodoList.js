@@ -8,8 +8,7 @@ import {
 
 import TaskItem from "./TaskItem";
 import classes from "./TodoList.module.css";
-import { Spin, Button } from 'antd';
-
+import { Spin, Button } from "antd";
 
 function TodoList(props) {
   const taskList = props.taskList;
@@ -18,7 +17,7 @@ function TodoList(props) {
 
   const isLoading = useSelector((store) => store.todoState.isLoading);
 
-  const isError = useSelector(store => store.todoState.isError);
+  const isError = useSelector((store) => store.todoState.isError);
 
   const onCompletionStageChanged = (id, value) => {
     dispatch(ChangeStatusCompletedAsync(id, value));
@@ -31,8 +30,14 @@ function TodoList(props) {
   return (
     <div>
       <Title level={3}>{props.title}</Title>
-      {(props.title === "Danh sách task") && (isLoading && <Spin tip="Loading..."></Spin>)}
-      {(props.title === "Danh sách task") && isError && <Button className={classes.btn} onClick={() => dispatch(GetData())}>Try again!</Button>}
+      {props.title === "Danh sách task" && isLoading && (
+        <Spin tip="Loading..."></Spin>
+      )}
+      {props.title === "Danh sách task" && isError && (
+        <Button className={classes.btn} onClick={() => dispatch(GetData())}>
+          Try again!
+        </Button>
+      )}
       <div className={classes.todoListContainer}>
         {taskList.map((task) => (
           <TaskItem

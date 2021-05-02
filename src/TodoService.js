@@ -18,36 +18,29 @@ const AddTodo = (inputValue) => {
     isCompleted: false,
     isFavourite: false,
     createdDate: createDate,
-    completedDate: ""
+    completedDate: "",
   });
 };
 
 const ChooseFavourite = (id, value) => {
-  return axios.post(apiEndPoint + "/Todo/ChangeTaskFavoriteState",
-  {
+  return axios.post(apiEndPoint + "/Todo/ChangeTaskFavoriteState", {
     taskId: id,
-    isFavourite: value   
-
-  },
-  )
+    isFavourite: value,
+  });
 };
 
 const ChangeStatusComplete = (id, value) => {
-  return axios.post(apiEndPoint + "/Todo/ChangeTaskCompletedState" ,
-  {
+  return axios.post(apiEndPoint + "/Todo/ChangeTaskCompletedState", {
     taskId: id,
-    isCompleted: value   
-
-  },
-  )
+    isCompleted: value,
+  });
 };
 
 const TodoService = {
   GetTodoList,
   AddTodo,
   ChooseFavourite,
-  ChangeStatusComplete
+  ChangeStatusComplete,
 };
-
 
 export default TodoService;

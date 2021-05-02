@@ -30,21 +30,11 @@ export default function Home() {
 
   const dispatch = useDispatch();
   useEffect(() => dispatch(
-  // {
-  //   type: "Change_Loading",
-  //   payload: {
-  //     isLoading: false
-  //   }
-  // }
   GetData()
   )
   , [])
 
-  const isLoading = useSelector((store) => store.todoState.isLoading);
-  return !true ? (
-    "Loading..."
-  ) : (
-    <>
+  return <>
       <AppHeader></AppHeader>
       <div className={classes.taskInputContainer}>
         <TaskInput />
@@ -57,5 +47,4 @@ export default function Home() {
         />
       </section>
     </>
-  );
 }

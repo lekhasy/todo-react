@@ -9,7 +9,6 @@ import {
 } from "../ActionType";
 import { v4 as uuidv4 } from "uuid";
 import MockTask from "../../MockTasks";
-import _ from "lodash";
 
 export const todo = (
   state = {

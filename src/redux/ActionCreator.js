@@ -8,7 +8,6 @@ import {
   LogoutSucces,
   BeginAddTodo,
   AddTodoSuccess,
-  GetTodoList,
   SyncError,
   GetTodoSuccess,
 } from "./ActionType";
@@ -85,7 +84,12 @@ export const AddNewTaskAsync = (inputValue) => async (dispatch, getState) => {
 
 export const GetData = () => async (dispatch, getState) => {
   try {
+    dispatch({
+      type: BeginAddTodo,
+    });
+
     const data = await TodoService.GetTodoList();
+
     dispatch({
       type: GetTodoSuccess,
       payload: {
@@ -98,3 +102,35 @@ export const GetData = () => async (dispatch, getState) => {
     });
   }
 };
+
+export const ChooseFavouriteTaskAsync = (id, value) => async (dispatch, getState) => {
+  try {
+    await TodoService.ChooseFavourite(id, value);
+    dispatch({
+      type: ChooseFavouriteTaskValue,
+        payload: {
+          id,
+          value,
+        },
+    })
+  }catch(err){
+
+  }
+
+}
+
+export const ChangeStatusCompletedAsync = (id, value) => async (dispatch, getState) => {
+  try {
+    await TodoService.ChangeStatusComplete(id, value);
+    dispatch({
+      type: ChangeStatusCompleteValue,
+        payload: {
+          id,
+          value,
+        },
+    })
+  }catch(err){
+
+  }
+
+}

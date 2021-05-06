@@ -1,18 +1,17 @@
 import {
   ChangeInputValueType,
   ChangeStatusCompleteValue,
-  ChooseFavouriteTaskValue,
+  ChooseFavoriteTaskValue,
   BeginAddTodo,
   AddTodoSuccess,
   SyncError,
   GetTodoSuccess,
 } from "../ActionType";
 import { v4 as uuidv4 } from "uuid";
-import MockTask from "../../MockTasks";
 
 export const todo = (
   state = {
-    taskList: [...MockTask],
+    taskList: [],
     newTaskName: "",
     isLoading: true,
     isError: false,
@@ -47,7 +46,7 @@ export const todo = (
         id: uuidv4(),
         taskName: action.payload.newTaskName,
         isCompleted: false,
-        isFavourite: false,
+        isFavorite: false,
         createdDate: new Date(),
         completedDate: "",
       };
@@ -71,10 +70,10 @@ export const todo = (
       console.log(newTaskList);
       return { ...state, taskList: newTaskList };
     }
-    case ChooseFavouriteTaskValue: {
+    case ChooseFavoriteTaskValue: {
       const newTaskList = state.taskList.map((task) =>
         task.id === action.payload.id
-          ? { ...task, isFavourite: !task.isFavourite }
+          ? { ...task, isFavorite: !task.isFavorite }
           : task
       );
       return { ...state, taskList: newTaskList };

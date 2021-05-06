@@ -3,7 +3,7 @@ import {
   ChangeInputValueType,
   GetTasksListValue,
   ChangeStatusCompleteValue,
-  ChooseFavouriteTaskValue,
+  ChooseFavoriteTaskValue,
   LoginSucces,
   LogoutSucces,
   BeginAddTodo,
@@ -39,9 +39,9 @@ export const ChangeStatusComplete = (id, value) => {
   };
 };
 
-export const ChooseFavouriteTask = (id, value) => {
+export const ChooseFavoriteTask = (id, value) => {
   return {
-    type: ChooseFavouriteTaskValue,
+    type: ChooseFavoriteTaskValue,
     payload: {
       id,
       value,
@@ -90,10 +90,11 @@ export const GetData = () => async (dispatch, getState) => {
 
     const data = await TodoService.GetTodoList();
 
+    console.log("data fetch ve:", data.data.data);
     dispatch({
       type: GetTodoSuccess,
       payload: {
-        taskList: data.data,
+        taskList: data.data.data,
       },
     });
   } catch (err) {
@@ -103,14 +104,14 @@ export const GetData = () => async (dispatch, getState) => {
   }
 };
 
-export const ChooseFavouriteTaskAsync = (id, value) => async (
+export const ChooseFavoriteTaskAsync = (id, value) => async (
   dispatch,
   getState
 ) => {
   try {
-    await TodoService.ChooseFavourite(id, value);
+    await TodoService.ChooseFavorite(id, value);
     dispatch({
-      type: ChooseFavouriteTaskValue,
+      type: ChooseFavoriteTaskValue,
       payload: {
         id,
         value,

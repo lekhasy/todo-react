@@ -14,18 +14,16 @@ const GetTodoList = () => {
 const AddTodo = (inputValue) => {
   const createDate = new Date();
   return axios.post(apiEndPoint + "/Todo/AddTodo", {
+    user: UserServcie.GetUserName(),
     taskName: inputValue,
-    isCompleted: false,
-    isFavourite: false,
     createdDate: createDate,
-    completedDate: "",
   });
 };
 
-const ChooseFavourite = (id, value) => {
+const ChooseFavorite = (id, value) => {
   return axios.post(apiEndPoint + "/Todo/ChangeTaskFavoriteState", {
     taskId: id,
-    isFavourite: value,
+    isFavorite: value,
   });
 };
 
@@ -39,7 +37,7 @@ const ChangeStatusComplete = (id, value) => {
 const TodoService = {
   GetTodoList,
   AddTodo,
-  ChooseFavourite,
+  ChooseFavorite,
   ChangeStatusComplete,
 };
 

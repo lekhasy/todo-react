@@ -18,7 +18,7 @@ export default function Home() {
 
   let tasksNotCompleted = _.orderBy(
     partitions[1],
-    ["isFavourite", "createdDate"],
+    ["isFavorite", "createdDate"],
     ["desc", "desc"]
   );
 
@@ -29,7 +29,10 @@ export default function Home() {
   }
 
   const dispatch = useDispatch();
-  useEffect(() => dispatch(GetData()), []);
+  useEffect(() => {
+    dispatch(GetData());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>

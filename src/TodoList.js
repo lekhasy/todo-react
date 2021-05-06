@@ -2,7 +2,7 @@ import Title from "antd/lib/typography/Title";
 import { useDispatch, useSelector } from "react-redux";
 import {
   ChangeStatusCompletedAsync,
-  ChooseFavouriteTaskAsync,
+  ChooseFavoriteTaskAsync,
   GetData,
 } from "./redux/ActionCreator";
 
@@ -23,8 +23,8 @@ function TodoList(props) {
     dispatch(ChangeStatusCompletedAsync(id, value));
   };
 
-  const onChooseFavouriteTask = (id, value) => {
-    dispatch(ChooseFavouriteTaskAsync(id, value));
+  const onChooseFavoriteTask = (id, value) => {
+    dispatch(ChooseFavoriteTaskAsync(id, value));
   };
 
   return (
@@ -43,7 +43,7 @@ function TodoList(props) {
           <TaskItem
             key={task.id}
             taskItem={task}
-            onChooseFavouriteTask={onChooseFavouriteTask}
+            onChooseFavoriteTask={onChooseFavoriteTask}
             onCompletionStageChanged={onCompletionStageChanged}
           />
         ))}

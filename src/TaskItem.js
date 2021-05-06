@@ -5,7 +5,7 @@ import { AiFillStar } from "react-icons/ai";
 
 function TaskItem({
   taskItem,
-  onChooseFavouriteTask,
+  onChooseFavoriteTask,
   onCompletionStageChanged,
 }) {
   const handleChange = (e) => {
@@ -13,7 +13,7 @@ function TaskItem({
   };
 
   const handleFavStatus = (e) => {
-    onChooseFavouriteTask(taskItem.id, !taskItem.isFavourite);
+    onChooseFavoriteTask(taskItem.id, !taskItem.isFavorite);
   };
 
   return (
@@ -30,7 +30,7 @@ function TaskItem({
       {taskItem.isCompleted ? null : (
         <AiFillStar
           onClick={handleFavStatus}
-          style={{ color: taskItem.isFavourite ? "orange" : "gainsboro" }}
+          style={{ color: taskItem.isFavorite ? "orange" : "gainsboro" }}
         />
       )}
     </div>

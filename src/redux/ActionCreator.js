@@ -3,11 +3,13 @@ import {
   ChangeInputValueType,
   GetTasksListValue,
   ChangeStatusCompleteValue,
-  ChooseFavouriteTaskValue,
+  ChooseFavoriteTaskValue,
   LoginSucces,
   LogoutSucces,
   BeginAddTodo,
   AddTodoSuccess,
+  SyncError,
+  GetTodoSuccess,
 } from "./ActionType";
 
 export const ChangeInputValue = (newInputValue) => {
@@ -37,9 +39,9 @@ export const ChangeStatusComplete = (id, value) => {
   };
 };
 
-export const ChooseFavouriteTask = (id, value) => {
+export const ChooseFavoriteTask = (id, value) => {
   return {
-    type: ChooseFavouriteTaskValue,
+    type: ChooseFavoriteTaskValue,
     payload: {
       id,
       value,
@@ -72,8 +74,68 @@ export const AddNewTaskAsync = (inputValue) => async (dispatch, getState) => {
       },
     });
   } catch (ex) {
-    // ADD_TODO_ERR
+    dispatch({
+      type: SyncError,
+    });
   } finally {
     // END_ADD_TODO
+  }
+};
+
+export const GetData = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: BeginAddTodo,
+    });
+
+    const data = await TodoService.GetTodoList();
+
+    console.log("data fetch ve:", data.data.data);
+    dispatch({
+      type: GetTodoSuccess,
+      payload: {
+        taskList: data.data.data,
+      },
+    });
+  } catch (err) {
+    dispatch({
+      type: SyncError,
+    });
+  }
+};
+
+export const ChooseFavoriteTaskAsync = (id, value) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    await TodoService.ChooseFavorite(id, value);
+    dispatch({
+      type: ChooseFavoriteTaskValue,
+      payload: {
+        id,
+        value,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const ChangeStatusCompletedAsync = (id, value) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    await TodoService.ChangeStatusComplete(id, value);
+    dispatch({
+      type: ChangeStatusCompleteValue,
+      payload: {
+        id,
+        value,
+      },
+    });
+  } catch (err) {
+    console.log(err);
   }
 };

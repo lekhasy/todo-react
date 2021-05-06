@@ -1,9 +1,11 @@
 import _ from "lodash";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AppHeader from "./AppHeader";
 import TaskInput from "./TaskInput";
 import TodoList from "./TodoList";
 import classes from "./Home.module.css";
+import { GetData } from "./redux/ActionCreator";
+import { useEffect } from "react";
 
 export default function Home() {
   const taskList = useSelector((store) => store.todoState.taskList);
@@ -16,7 +18,7 @@ export default function Home() {
 
   let tasksNotCompleted = _.orderBy(
     partitions[1],
-    ["isFavourite", "createdDate"],
+    ["isFavorite", "createdDate"],
     ["desc", "desc"]
   );
 
@@ -25,6 +27,12 @@ export default function Home() {
       t.taskName.includes(newTaskValue)
     );
   }
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(GetData());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>

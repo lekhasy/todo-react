@@ -1,9 +1,6 @@
 import { Input } from "antd";
 import { Button } from "antd";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { AddTodoSuccess } from "./redux/ActionType";
-import Store from "./redux/Store";
 import TodoService from "./TodoService";
 
 export default function AxiosPlayground() {
@@ -14,46 +11,24 @@ export default function AxiosPlayground() {
 
   const [inputValue, setInputValue] = useState("");
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       setIsLoading(true);
-  //       setIsError(false);
-  //       const todoListResonse = await TodoService.GetTodoList();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+        setIsError(false);
+        const todoListResonse = await TodoService.GetTodoList();
 
-  //       setTodos(todoListResonse.data.data);
-  //     } catch (ex) {
-  //       setIsError(true);
-  //       console.log("lỗi rồi");
-  //     } finally {
-  //       setIsLoading(false);
-  //     }
-  //   };
+        setTodos(todoListResonse.data.data);
+      } catch (ex) {
+        setIsError(true);
+        console.log("lỗi rồi");
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  //   fetchData();
-  // }, [retryCount]);
-
-  //Redux thunk
-  const fetchData = () => async dispatch => {
-    try {
-      setIsLoading(true);
-      setIsError(false);
-
-      const todoListResonse = await TodoService.GetTodoList();
-      dispatch({
-        type: AddTodoSuccess,
-        taskList: todoListResonse
-      })
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
-  fetchData();
-  const data = useSelector((store) => store.todoState.taskList)
-  console.log(data);
+    fetchData();
+  }, [retryCount]);
 
   const handleTryAgain = () => {
     setRetryCount(retryCount + 1);

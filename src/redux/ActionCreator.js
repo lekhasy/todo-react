@@ -1,4 +1,6 @@
+import axios from "axios";
 import TodoService from "../TodoService";
+import UserServcie from "../UserService";
 import {
   ChangeInputValueType,
   GetTasksListValue,
@@ -8,6 +10,7 @@ import {
   LogoutSucces,
   BeginAddTodo,
   AddTodoSuccess,
+  GetTodos,
 } from "./ActionType";
 
 export const ChangeInputValue = (newInputValue) => {
@@ -23,26 +26,6 @@ export const GetTasksList = (tasksList) => {
     type: GetTasksListValue,
     payload: {
       tasksList,
-    },
-  };
-};
-
-export const ChangeStatusComplete = (id, value) => {
-  return {
-    type: ChangeStatusCompleteValue,
-    payload: {
-      id,
-      value,
-    },
-  };
-};
-
-export const ChooseFavouriteTask = (id, value) => {
-  return {
-    type: ChooseFavouriteTaskValue,
-    payload: {
-      id,
-      value,
     },
   };
 };
@@ -75,5 +58,59 @@ export const AddNewTaskAsync = (inputValue) => async (dispatch, getState) => {
     // ADD_TODO_ERR
   } finally {
     // END_ADD_TODO
+  }
+};
+
+
+export const GetTodosFromAPI = () => async dispatch => {
+  try {
+    const response = await axios.get("http://localhost:5000/Todo/GetTodos", {
+      params: {
+        user: UserServcie.GetUserName(),
+      },
+    });
+
+    dispatch({
+      type: GetTodos,
+      payload: response.data.data
+    })
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const ChooseFavouriteTask = (id, value) => async dispatch => {
+  try {
+    await axios.post("http://localhost:5000/Todo/ChangeTaskFavoriteState", {
+      taskId: id,
+      isFavorite: value,
+    });
+    dispatch({
+      type: ChooseFavouriteTaskValue,
+      payload: {
+        id,
+        value,
+      },
+    })
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const ChangeStatusComplete = (id, value) => async dispatch => {
+  try {
+    await axios.post("http://localhost:5000/Todo/ChangeTaskCompletedState", {
+      taskId: id,
+      isCompleted: value
+    });
+    dispatch({
+      type: ChangeStatusCompleteValue,
+      payload: {
+        id,
+        value,
+      },
+    })
+  } catch (error) {
+    console.log(error);
   }
 };

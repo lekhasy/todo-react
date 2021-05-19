@@ -4,6 +4,7 @@ import {
   ChooseFavouriteTaskValue,
   BeginAddTodo,
   AddTodoSuccess,
+  GetTodos,
 } from "../ActionType";
 import { v4 as uuidv4 } from "uuid";
 import MockTask from "../../MockTasks";
@@ -51,7 +52,7 @@ export const todo = (
           ? { ...task, isCompleted: !task.isCompleted }
           : task
       );
-      console.log(newTaskList);
+
       return { ...state, taskList: newTaskList };
     }
     case ChooseFavouriteTaskValue: {
@@ -60,8 +61,17 @@ export const todo = (
           ? { ...task, isFavourite: !task.isFavourite }
           : task
       );
+
       return { ...state, taskList: newTaskList };
     }
+
+    //Get API
+    case GetTodos:
+      return {
+        ...state,
+        taskList: action.payload
+      }
+
     default:
       return state;
   }

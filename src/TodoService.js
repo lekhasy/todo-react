@@ -12,6 +12,7 @@ const GetTodoList = () => {
 };
 
 const AddTodo = (inputValue) => {
+  console.log(inputValue);
   return axios.post(apiEndPoint + "/Todo/AddTodo", {
     user: UserServcie.GetUserName(),
     taskName: inputValue,

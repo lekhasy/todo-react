@@ -7,3 +7,5 @@ export const LogoutSucces = "Logout_Succsess";
 
 export const BeginAddTodo = "Begin_Add_Todo";
 export const AddTodoSuccess = "Add_Todo_Success";
+
+export const GetTodos = "Get_Todos"
